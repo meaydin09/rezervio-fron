@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rezervio
 
-## Getting Started
+**Rezervio**, diyetisyen, fizyoterapist, berber, kuaför, psikolog ve benzeri randevu ile çalışan uzmanların müşterilerinden online randevu almasını sağlayan bir **SaaS randevu platformu**dur.
 
-First, run the development server:
+Uzmanlar üyelik satın alır, profil ve çalışma saatlerini tanımlar; ardından kendilerine özel bir rezervasyon sayfası üzerinden müşterileri 7/24 randevu oluşturabilir.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Nasıl çalışır?
+
+### Uzman (işletme sahibi) akışı
+
+1. **Üyelik** — Platforma kayıt olur ve abonelik satın alır.
+2. **Aktivasyon** — Ödeme tamamlanınca üyelik aktif hale gelir.
+3. **Profil kurulumu** — Ad, iletişim, hizmet bilgileri ve görünüm ayarlarını düzenler.
+4. **Çalışma takvimi** — Hangi günlerde ve hangi saat aralıklarında randevu kabul edeceğini seçer.
+5. **Kişisel sayfa** — Kurulum bitince `rezervio.com/{kullaniciadi}` adresinde yayına alınan randevu sayfası atanır.
+
+### Müşteri akışı
+
+1. Uzmanın paylaştığı linki açar (`rezervio.com/{kullaniciadi}`).
+2. Uygun gün ve saati seçer.
+3. Randevusunu onaylar (ileride WhatsApp hatırlatma vb. entegrasyonlar).
+
+```mermaid
+flowchart LR
+  A[Kayıt ve üyelik] --> B[Profil düzenleme]
+  B --> C[Çalışma günleri ve saatleri]
+  C --> D["rezervio.com/kullaniciadi"]
+  D --> E[Müşteri randevu alır]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Kimler için?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Sektör | Örnek kullanım |
+|--------|----------------|
+| Sağlık ve wellness | Diyetisyen, fizyoterapist, psikolog |
+| Güzellik | Berber, kuaför, estetisyen |
+| Danışmanlık | Koç, danışman, eğitmen |
 
-## Learn More
+Her uzman kendi müsaitlik takvimine göre müşterilerine **tek link** üzerinden randevu sunar; telefon trafiği ve manuel takvim yükü azalır.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Bu repoda ne var?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Şu an bu depo **pazarlama / landing** tarafını içerir:
 
-## Deploy on Vercel
+- Ana sayfa hero bölümü (randevu mockup'ı, CTA)
+- Header ve footer
+- Türkçe arayüz metinleri
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Planlanan modüller (ayrı ekranlar ve API entegrasyonu ile gelecek):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Kayıt, giriş ve abonelik yönetimi
+- Uzman paneli (profil + çalışma saatleri)
+- Herkese açık randevu sayfası (`/{kullaniciadi}`)
+- Randevu oluşturma ve bildirimler
+
+---
+
+## Teknoloji
+
+| Alan | Seçim |
+|------|--------|
+| Framework | [Next.js](https://nextjs.org) 16 (App Router) |
+| UI | React 19, Tailwind CSS 4 |
+| Form ve doğrulama | React Hook Form, Zod |
+| Veri / state | TanStack Query, Zustand |
+| HTTP | Axios |
+| Dil | TypeScript |
+
+---
+
+## Proje yapısı
+
+```
+frontend-rezervio/
+├── app/                    # Next.js App Router (layout, ana sayfa)
+├── components/
+│   ├── layout/             # Header, Footer, navigasyon
+│   └── sections/
+│       └── homepage/hero/  # Landing hero + randevu mockup bileşenleri
+├── types/                  # Paylaşılan TypeScript tipleri
+└── public/                 # Statik dosyalar
+```
+
+---
+
+## Kurulum
+
+Gereksinimler: **Node.js 20+**, npm (veya pnpm / yarn).
+
+```bash
+# Bağımlılıkları yükle
+npm install
+
+# Geliştirme sunucusu (http://localhost:3000)
+npm run dev
+
+# Production build
+npm run build
+npm start
+
+# Lint
+npm run lint
+```
+
+---
+
+## Ortam değişkenleri
+
+Backend ve ödeme entegrasyonları eklendiğinde `.env.local` örneği:
+
+```env
+# API taban URL (örnek)
+NEXT_PUBLIC_API_URL=https://api.rezervio.com
+
+# Ödeme / auth vb. (ileride)
+# STRIPE_SECRET_KEY=
+```
+
+Şu an zorunlu env tanımı yoktur; landing sayfası yerel olarak `npm run dev` ile çalışır.
+
+---
+
+## Yol haritası
+
+- [ ] Kayıt / giriş ve abonelik (Stripe veya yerel ödeme)
+- [ ] Uzman onboarding: profil + çalışma günleri / slotlar
+- [ ] Dinamik randevu sayfası: `/{kullaniciadi}`
+- [ ] Müşteri randevu akışı ve onay e-postası / WhatsApp
+- [ ] Uzman paneli: randevu listesi, iptal, müsaitlik güncelleme
+
+---
+
+## Lisans
+
+Özel proje — dağıtım hakları proje sahibine aittir.
