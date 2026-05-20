@@ -110,7 +110,7 @@ export default function LoginForm() {
 
         <p className="mt-6 text-center text-sm text-ink-600">
           Hesabın yok mu?{' '}
-          <Link href="/kayit" className="font-semibold text-brand-600 hover:underline">
+          <Link href="/register" className="font-semibold text-brand-600 hover:underline">
             Kayıt ol
           </Link>
         </p>

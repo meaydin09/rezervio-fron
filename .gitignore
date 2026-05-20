@@ -30,11 +30,22 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files — asla commit etme
+.env
+.env.*
+!.env.example
 
 # vercel
 .vercel
+
+# local / IDE
+.cursor/
+.idea/
+.vscode/
+*.log
+
+# local assets (tasarım mockup, screenshot vb.)
+/image.png
 
 # typescript
 *.tsbuildinfo
