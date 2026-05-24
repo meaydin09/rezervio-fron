@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import './globals.css'
 
 const geistSans = Geist({
@@ -17,6 +18,9 @@ export const metadata: Metadata = {
   description: 'Psikologlar, diyetisyenler, kuaförler için akıllı randevu yönetimi.',
   metadataBase: new URL('https://rezervio.com'),
   alternates: { canonical: '/' },
+  icons: {
+    icon: '/favicon.png',
+  },
   openGraph: {
     title: 'Rezervio — Modern Randevu Platformu',
     description: 'Psikologlar, diyetisyenler, kuaförler için akıllı randevu yönetimi.',
@@ -24,6 +28,7 @@ export const metadata: Metadata = {
     siteName: 'Rezervio',
     locale: 'tr_TR',
     type: 'website',
+    images: [{ url: '/favicon.png' }],
   },
 }
 
@@ -31,7 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="tr" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
       </body>
     </html>
   )

@@ -25,7 +25,7 @@ export default function HeroContent() {
 
       <div className="mt-7 flex flex-col sm:flex-row gap-3">
         <Link
-          href="/kayit"
+          href="/register"
           className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-xl shadow-[0_4px_16px_-4px_rgba(79,70,229,0.4)] transition flex items-center justify-center gap-2"
         >
           14 gün ücretsiz başla

@@ -1,6 +1,13 @@
 import { Pencil } from 'lucide-react'
 import { subscriptions } from '../../data/subscriptions-data'
 
+const planBadge: Record<string, string> = {
+  'Profesyonel': 'bg-brand-50 text-brand-700',
+  'Kurumsal': 'bg-purple-50 text-purple-700',
+  'Deneme': 'bg-amber-50 text-amber-700',
+  'Başlangıç': 'bg-gray-50 text-gray-700',
+}
+
 export default function SubscriptionsTable() {
   return (
     <div className="mt-6 bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">

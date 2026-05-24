@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 export default function MoreSectorsCard() {
   return (
     <Link
-      href="/kayit"
+      href="/register"
       className="group relative bg-gradient-to-br from-brand-600 to-violet-600 text-white rounded-2xl shadow-[0_4px_16px_-4px_rgba(79,70,229,0.4)] overflow-hidden hover:scale-[1.01] transition"
     >
       <div className="absolute inset-0 grid-pattern opacity-20" />

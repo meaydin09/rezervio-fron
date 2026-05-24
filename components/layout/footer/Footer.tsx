@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { navLinks } from './nav-links'
 export default function Footer() {
@@ -7,8 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-ink-500">
         
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700" />
-          <span className="font-bold text-ink-800">Rezervio</span>
+          <Image src="/rezervio-logo.png" alt="Rezervio" width={100} height={30} />
           <span>© 2026</span>
         </div>
 

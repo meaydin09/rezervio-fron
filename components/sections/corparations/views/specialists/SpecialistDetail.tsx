@@ -1,7 +1,11 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { Specialist, TimeSlot } from '../../types'
 import SpecialistDayStrip from './SpecialistDayStrip'
+import BookingModal from './BookingModal'
 
 interface Props {
   specialist: Specialist
@@ -18,12 +22,10 @@ const slotStyles: Record<TimeSlot['variant'], string> = {
 }
 
 const DAY_NAMES = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
-const SHORT_NAMES = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz']
 
 export default function SpecialistDetail({ specialist, selectedDay, slots, onPickDay, onPickSlot }: Props) {
-  const dayIdx = SHORT_NAMES.indexOf(
-    ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'][selectedDay % 7] ?? 'Sal'
-  )
+  const [showModal, setShowModal] = useState(false)
+  const selectedSlot = slots.find((s) => s.variant === 'selected')
   const dayName = DAY_NAMES[selectedDay % 7] ?? 'Salı'
 
   return (
@@ -68,19 +70,24 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
           </div>
         </div>
 
-        <Link
-          href="/profil"
-          className="mt-5 w-full block text-center bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl shadow-[0_10px_30px_-10px_rgba(79,70,229,0.25)] transition"
+        <button
+          onClick={() => setShowModal(true)}
+          disabled={!selectedSlot}
+          className={`mt-5 w-full block text-center font-semibold py-3 rounded-xl transition ${
+            selectedSlot
+              ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-[0_10px_30px_-10px_rgba(79,70,229,0.25)] cursor-pointer'
+              : 'bg-ink-100 text-ink-400 cursor-not-allowed'
+          }`}
         >
-          Bu uzmanla devam et →
-        </Link>
+          {selectedSlot ? 'Randevu Oluştur' : 'Önce bir saat seçin'}
+        </button>
       </div>
 
       <div className="mt-5 grid grid-cols-3 gap-3">
         {[
           { label: 'Deneyim', value: specialist.experience, color: 'text-brand-600' },
-          { label: 'Puan', value: `${specialist.rating} ★`, color: 'text-brand-600' },
-          { label: 'Yorum', value: String(specialist.reviewCount), color: 'text-brand-600' },
+          { label: 'Puan',    value: `${specialist.rating} ★`, color: 'text-brand-600' },
+          { label: 'Yorum',   value: String(specialist.reviewCount), color: 'text-brand-600' },
         ].map((stat) => (
           <div key={stat.label} className="bg-white rounded-xl border border-ink-100 p-3 text-center">
             <div className="text-xs text-ink-500">{stat.label}</div>
@@ -88,6 +95,15 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
           </div>
         ))}
       </div>
+
+      {showModal && (
+        <BookingModal
+          specialistName={specialist.name}
+          selectedDay={selectedDay}
+          selectedTime={selectedSlot?.time ?? ''}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   )
 }

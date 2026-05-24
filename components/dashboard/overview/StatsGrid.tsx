@@ -35,12 +35,14 @@ export default function StatsGrid() {
         }
       />
       <StatCard
+        label="İptal Oranı"
         period="İptal Oranı"
         badge={{ text: '↓ 3%', color: 'bg-rose-50 text-rose-700' }}
         value="4.2%"
         extra={<div className="text-[11px] text-ink-500">Geçen aya göre düşüş</div>}
       />
       <StatCard
+        label="Doluluk"
         period="Doluluk"
         badge={{ text: 'İyi', color: 'bg-emerald-50 text-emerald-700' }}
         value="87%"

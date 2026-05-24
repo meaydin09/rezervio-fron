@@ -3,6 +3,7 @@ import { X, Shield } from 'lucide-react'
 import SidebarNav from './SidebarNav'
 import SidebarUser from './SidebarUser'
 import type { AdminView } from '../types'
+import Image from 'next/image'
 
 interface Props {
   isOpen: boolean
@@ -22,8 +23,14 @@ export default function Sidebar({ isOpen, activeView, onClose, onChangeView }: P
       }`}>
         <div className="flex items-center justify-between px-2 mb-6">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 to-rose-700 flex items-center justify-center shadow-[0_10px_30px_-10px_rgba(244,63,94,0.4)]">
-              <Shield className="w-5 h-5 text-white" strokeWidth={2} />
+            <div className="w-9 h-9 rounded-xl from-rose-500 to-rose-700 flex items-center justify-center shadow-[0_10px_30px_-10px_rgba(244,63,94,0.4)]">
+              <Image
+  src="/favicon.png"
+  alt="Rezervio"
+  width={20}
+  height={20}
+  className="object-contain"
+/>
             </div>
             <div>
               <div className="text-base font-bold tracking-tight text-white leading-tight">Rezervio</div>

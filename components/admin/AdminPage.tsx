@@ -1,5 +1,6 @@
 'use client'
 
+import type { AdminView } from './types'
 import Sidebar from './layout/Sidebar'
 import Topbar from './layout/Topbar'
 import OverviewView from './views/overview/OverviewView'
@@ -15,13 +16,16 @@ import UserEditModal from './modals/UserEditModal'
 import NewUserModal from './modals/NewUserModal'
 import Toast from './modals/Toast'
 import { useSidebar } from './hooks/useSidebar'
-import { useAdminView } from './hooks/useAdminView'
+import { useAdminView  } from './hooks/useAdminView'
 import { useUserModal } from './hooks/useUserModal'
 import { useState } from 'react'
 
+
 export default function AdminPage() {
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
   const { isOpen, toggle, close } = useSidebar()
-  const { activeView, setActiveView } = useAdminView()
+  const { activeView, setActiveView , title } = useAdminView()
   const { selectedUser, open: openUser, close: closeUser } = useUserModal()
   const [showNewUser, setShowNewUser] = useState(false)
   const [toast, setToast] = useState({ visible: false, text: '' })
@@ -30,26 +34,38 @@ export default function AdminPage() {
     setToast({ visible: true, text })
     setTimeout(() => setToast({ visible: false, text: '' }), 2500)
   }
+  const handleRefresh = () => {
+  setIsRefreshing(true)
+  setTimeout(() => {
+    setIsRefreshing(false)
+    showToast('Tüm veriler güncellendi')
+  }, 1200)
+}
 
   return (
     <div className="min-h-screen bg-ink-50">
       <Sidebar
-        isOpen={isOpen}
-        activeView={activeView}
-        onClose={close}
-        onViewChange={(view) => { setActiveView(view); close() }}
-        onLogout={() => {}}
-      />
+  isOpen={isOpen}
+  activeView={activeView}
+  onClose={close}
+  onChangeView={(view: AdminView) => { setActiveView(view); close() }}
+/>
 
       <main className="lg:ml-64 px-4 sm:px-6 lg:px-8 pt-6 pb-12 max-w-[1500px]">
         <Topbar
-          activeView={activeView}
-          onToggleSidebar={toggle}
-          onRefresh={() => showToast('Tüm veriler güncellendi')}
-          onNewUser={() => setShowNewUser(true)}
-        />
+  title={title}
+  onToggleSidebar={toggle}
+  onRefresh={handleRefresh}
+  onNewUser={() => setShowNewUser(true)}
+  isRefreshing={isRefreshing}
+/>
 
-        {activeView === 'overview'      && <OverviewView onViewChange={setActiveView} />}
+<div className={`transition-all duration-500 ${isRefreshing ? 'opacity-40 blur-sm pointer-events-none' : 'opacity-100 blur-0'}`}>
+
+
+        {activeView === 'overview' && (
+  <OverviewView onViewUsers={() => setActiveView('users')} />
+)}
         {activeView === 'users'         && <UsersView onNewUser={() => setShowNewUser(true)} onEditUser={openUser} />}
         {activeView === 'subscriptions' && <SubscriptionsView />}
         {activeView === 'appointments'  && <AppointmentsView />}
@@ -58,6 +74,8 @@ export default function AdminPage() {
         {activeView === 'support'       && <SupportView />}
         {activeView === 'audit'         && <AuditView />}
         {activeView === 'settings'      && <SettingsView />}
+        </div>
+
       </main>
 
       {selectedUser && (

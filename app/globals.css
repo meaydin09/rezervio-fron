@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* stylelint-disable-next-line at-rule-no-unknown */
 @theme {
   --color-brand-50: #eef2ff;
   --color-brand-100: #e0e7ff;
@@ -25,6 +26,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  overflow-x: hidden;
 }
 
 body {
@@ -75,4 +77,11 @@ details[open] summary .faq-icon { transform: rotate(180deg); }
 .seo-expanded { max-height: 6000px; }
 button {
   cursor: pointer;
+}
+html, body {
+  overflow-x: hidden;
+}
+@keyframes shrink {
+  from { width: 100%; }
+  to { width: 0%; }
 }

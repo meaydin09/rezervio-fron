@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import type { CorporateView } from '../types'
 
 export function useCorporateDashboard() {
+  const [activeView, setActiveView] = useState<CorporateView>('overview')
   const [profileBannerVisible, setProfileBannerVisible] = useState(true)
   const [showAddSpecialistModal, setShowAddSpecialistModal] = useState(false)
   const [toast, setToast] = useState({ visible: false, text: '' })
@@ -11,6 +13,7 @@ export function useCorporateDashboard() {
   }
 
   return {
+    activeView, setActiveView,
     profileBannerVisible, setProfileBannerVisible,
     showAddSpecialistModal, setShowAddSpecialistModal,
     toast, showToast,

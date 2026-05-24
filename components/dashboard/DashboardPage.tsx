@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Sidebar from './layout/Sidebar'
 import Topbar from './layout/Topbar'
 import ProfileCompletion from './overview/ProfileCompletion'
@@ -18,7 +19,10 @@ import Toast from './modals/Toast'
 import { useSidebar } from './hooks/useSidebar'
 import { useDashboard } from './hooks/useDashboard'
 import { useTheme } from './hooks/useTheme'
-
+import type { DashboardView } from './types'
+import WhatsAppView from './views/WhatsAppView'
+import SettingsView from './views/SettingsView'
+import SubscriptionView from './views/SubscriptionView'
 export default function DashboardPage() {
   const { isOpen, toggle, close } = useSidebar()
   const {
@@ -28,45 +32,93 @@ export default function DashboardPage() {
     toast, showToast,
   } = useDashboard()
   const { active, customHex, setTheme, setCustomColor } = useTheme()
+  const [activeView, setActiveView] = useState<DashboardView>('overview')
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const handleRefresh = () => {
+    setIsRefreshing(true)
+    setTimeout(() => {
+      setIsRefreshing(false)
+      showToast('Veriler güncellendi')
+    }, 1200)
+  }
 
   return (
     <div className="min-h-screen bg-ink-50">
-      <Sidebar isOpen={isOpen} onClose={close} onLogout={() => setShowLogoutModal(true)} />
+      <Sidebar
+        isOpen={isOpen}
+        onClose={close}
+        onLogout={() => setShowLogoutModal(true)}
+        activeView={activeView}
+        onViewChange={setActiveView}
+      />
 
       <main className="lg:ml-64 pt-6 px-4 sm:px-6 lg:px-8 pb-12 max-w-[1400px]">
         <Topbar
           onToggleSidebar={toggle}
-          onRefresh={() => showToast('Veriler güncellendi')}
+          onRefresh={handleRefresh}
         />
 
-        {profileBannerVisible && (
-          <ProfileCompletion onClose={() => setProfileBannerVisible(false)} />
-        )}
+        <div className={`transition-all duration-500 ${isRefreshing ? 'opacity-40 blur-sm pointer-events-none' : 'opacity-100 blur-0'}`}>
 
-        <StatsGrid />
+          {activeView === 'overview' && (
+            <>
+              {profileBannerVisible && (
+                <ProfileCompletion onClose={() => setProfileBannerVisible(false)} />
+              )}
+              <StatsGrid />
+              <div className="mt-6 grid xl:grid-cols-3 gap-6">
+                <WeeklyCalendar />
+                <div className="space-y-5">
+                  <TodayAppointments />
+                  <BookingLinkCard />
+                  <ThemeCustomizer
+                    active={active}
+                    customHex={customHex}
+                    onSetTheme={setTheme}
+                    onSetCustomColor={setCustomColor}
+                  />
+                </div>
+              </div>
+              <div className="mt-6 grid xl:grid-cols-3 gap-6">
+                <OccupancyChart />
+                <PopularHours />
+              </div>
+              <div className="mt-6 grid xl:grid-cols-3 gap-6">
+                <SupportTickets onNewTicket={() => setShowNewTicketModal(true)} />
+                <QuickHelp onNewTicket={() => setShowNewTicketModal(true)} />
+              </div>
+            </>
+          )}
 
-        <div className="mt-6 grid xl:grid-cols-3 gap-6">
-          <WeeklyCalendar />
-          <div className="space-y-5">
-            <TodayAppointments />
-            <BookingLinkCard />
-            <ThemeCustomizer
-              active={active}
-              customHex={customHex}
-              onSetTheme={setTheme}
-              onSetCustomColor={setCustomColor}
-            />
-          </div>
-        </div>
+          {activeView === 'schedule' && (
+            <div className="mt-2">
+              <WeeklyCalendar />
+            </div>
+          )}
 
-        <div className="mt-6 grid xl:grid-cols-3 gap-6">
-          <OccupancyChart />
-          <PopularHours />
-        </div>
+          {activeView === 'appointments' && (
+            <div className="mt-2">
+              <TodayAppointments />
+            </div>
+          )}
 
-        <div className="mt-6 grid xl:grid-cols-3 gap-6">
-          <SupportTickets onNewTicket={() => setShowNewTicketModal(true)} />
-          <QuickHelp onNewTicket={() => setShowNewTicketModal(true)} />
+          {activeView === 'reports' && (
+            <div className="mt-2 grid xl:grid-cols-3 gap-6">
+              <OccupancyChart />
+              <PopularHours />
+            </div>
+          )}
+
+          {activeView === 'support' && (
+            <div className="mt-2 grid xl:grid-cols-3 gap-6">
+              <SupportTickets onNewTicket={() => setShowNewTicketModal(true)} />
+              <QuickHelp onNewTicket={() => setShowNewTicketModal(true)} />
+            </div>
+          )}
+{activeView === 'whatsapp'  && <WhatsAppView />}
+{activeView === 'settings'  && <SettingsView />}
+{activeView === 'subscription' && <SubscriptionView />}
         </div>
       </main>
 

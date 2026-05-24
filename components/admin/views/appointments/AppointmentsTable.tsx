@@ -1,6 +1,13 @@
 import { MoreVertical } from 'lucide-react'
 import { appointments } from '../../data/appointments-data'
 
+const statusBadge: Record<string, string> = {
+  'Onaylı': 'bg-emerald-50 text-emerald-700',
+  'Bekleyen': 'bg-amber-50 text-amber-700',
+  'Tamamlandı': 'bg-blue-50 text-blue-700',
+  'İptal': 'bg-red-50 text-red-700',
+}
+
 export default function AppointmentsTable() {
   return (
     <div className="mt-6 bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">

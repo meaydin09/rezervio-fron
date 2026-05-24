@@ -1,27 +1,38 @@
-import Link from 'next/link'
-import { LayoutGrid, Calendar, Users, BarChart2, MessageCircle, Settings } from 'lucide-react'
+import { LayoutGrid, Calendar, Users, BarChart2, MessageCircle, Settings,CreditCard  } from 'lucide-react'
+import type { DashboardView } from '../types'
 
-const navItems = [
-  { label: 'Genel Bakış', icon: LayoutGrid, href: '/dashboard', active: true },
-  { label: 'Takvimim', icon: Calendar, href: '/dashboard/schedule' },
-  { label: 'Randevular', icon: Users, href: '/dashboard/appointments', badge: { text: '12', color: 'bg-brand-100 text-brand-700' } },
-  { label: 'Raporlama', icon: BarChart2, href: '/dashboard/reports' },
-  { label: 'WhatsApp & Bildirim', icon: MessageCircle, href: '/dashboard/notifications', whatsapp: true },
-  { label: 'Destek', icon: MessageCircle, href: '/dashboard/support', badge: { text: '2', color: 'bg-amber-100 text-amber-700' } },
-  { label: 'Ayarlar', icon: Settings, href: '/dashboard/settings' },
+const navItems: {
+  view: DashboardView
+  label: string
+  icon: React.ElementType
+  badge?: { text: string; color: string }
+}[] = [
+  { view: 'overview',      label: 'Genel Bakış',         icon: LayoutGrid },
+  { view: 'schedule',      label: 'Takvimim',             icon: Calendar },
+  { view: 'appointments',  label: 'Randevular',           icon: Users,         badge: { text: '12', color: 'bg-brand-100 text-brand-700' } },
+  { view: 'reports',       label: 'Raporlama',            icon: BarChart2 },
+  { view: 'whatsapp',      label: 'WhatsApp & Bildirim',  icon: MessageCircle },
+  { view: 'support',       label: 'Destek',               icon: MessageCircle, badge: { text: '2', color: 'bg-amber-100 text-amber-700' } },
+  { view: 'settings',      label: 'Ayarlar',              icon: Settings },
+  { view: 'subscription', label: 'Aboneliğim', icon: CreditCard, badge: { text: 'Pro', color: 'bg-brand-100 text-brand-700' } }
 ]
 
-export default function SidebarNav() {
+interface Props {
+  active: DashboardView
+  onChange: (view: DashboardView) => void
+}
+
+export default function SidebarNav({ active, onChange }: Props) {
   return (
     <nav className="space-y-1 flex-1">
       {navItems.map((item) => {
         const Icon = item.icon
         return (
-          <Link
-            key={item.label}
-            href={item.href}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer ${
-              item.active
+          <button
+            key={item.view}
+            onClick={() => onChange(item.view)}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer ${
+              active === item.view
                 ? 'bg-ink-900 text-white'
                 : 'text-ink-600 hover:bg-ink-50 hover:text-ink-900'
             }`}
@@ -33,7 +44,7 @@ export default function SidebarNav() {
                 {item.badge.text}
               </span>
             )}
-          </Link>
+          </button>
         )
       })}
     </nav>

@@ -22,7 +22,7 @@ export default function MockupTimeSlots() {
         {timeSlots.map((slot) => (
           <span
             key={slot.time}
-            className={`inline-flex items-center justify-center px-3 py-2 rounded-xl text-xs font-medium transition ${slotStyles[slot.variant]}`}
+            className={`inline-flex items-center pointer-none justify-center px-3 py-2 rounded-xl text-xs font-medium transition ${slotStyles[slot.variant]}`}
           >
             {slot.time}
           </span>

@@ -18,7 +18,7 @@ export const plans: PricingPlan[] = [
       { text: 'Tema özelleştirme', included: false },
     ],
     ctaText: 'Ücretsiz başla',
-    ctaHref: '/kayit',
+    ctaHref: '/register',
     featured: false,
   },
   {
@@ -38,7 +38,7 @@ export const plans: PricingPlan[] = [
       { text: 'Tema & renk özelleştirme', included: true },
     ],
     ctaText: 'Satın Al',
-    ctaHref: '/kayit',
+    ctaHref: '/odeme',
     featured: true,
   },
   {
@@ -58,7 +58,7 @@ export const plans: PricingPlan[] = [
       { text: 'Öncelikli destek', included: true },
     ],
     ctaText: 'Satın Al',
-    ctaHref: '/kayit',
+    ctaHref: '/register',
     featured: false,
   },
 ]

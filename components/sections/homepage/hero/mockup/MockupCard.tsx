@@ -8,9 +8,9 @@ export default function MockupCard() {
       <MockupProfile />
       <MockupCalendar />
       <MockupTimeSlots />
-      <button className="mt-4 w-full bg-ink-900 hover:bg-ink-800 text-white text-sm font-semibold py-2.5 rounded-lg transition">
+      <div className="mt-4 w-full bg-ink-900 text-white text-sm font-semibold py-2.5 rounded-lg text-center select-none pointer-events-none">
         Randevu Al
-      </button>
+      </div>
     </div>
   )
 }

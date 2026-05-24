@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { LoginFormData } from './types'
@@ -24,12 +25,7 @@ export default function LoginForm() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 mb-8 sm:mb-10">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-[0_10px_30px_-10px_rgba(79,70,229,0.25)]">
-            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
-            </svg>
-          </div>
-          <span className="text-lg font-bold tracking-tight text-ink-900">Rezervio</span>
+          <Image src="/rezervio-logo.png" alt="Rezervio" width={120} height={36} priority />
         </Link>
 
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-900">Hoş geldin 👋</h1>

@@ -14,6 +14,17 @@ export interface Specialist {
     slots: number[]
   }
   
+  export type CorporateView =
+  | 'overview'
+  | 'specialists'
+  | 'calendar'
+  | 'appointments'
+  | 'services'
+  | 'reports'
+  | 'whatsapp'
+  | 'support'
+  | 'settings'
+    | 'subscription'
   export interface TodayAppointment {
     initials: string
     specialistName: string

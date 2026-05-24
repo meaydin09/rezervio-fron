@@ -22,7 +22,15 @@ export interface NavItem {
     bgColor: string
     badges: { text: string; color: string }[]
   }
-  
+  export type DashboardView =
+  | 'overview'
+  | 'schedule'
+  | 'appointments'
+  | 'reports'
+  | 'whatsapp'
+  | 'support'
+  | 'settings'
+  | 'subscription'
   export interface TicketData {
     id: string
     status: 'open' | 'pending' | 'resolved'

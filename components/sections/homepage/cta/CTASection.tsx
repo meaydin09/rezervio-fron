@@ -13,7 +13,7 @@ export default function CTASection() {
             14 gün boyunca tüm özellikleri ücretsiz dene. Kart bilgisi istemiyoruz.
           </p>
           <Link
-            href="/kayit"
+            href="/register"
             className="mt-7 inline-flex items-center gap-2 bg-white text-ink-900 font-semibold px-6 py-3 rounded-xl hover:bg-ink-100 transition"
           >
             Hemen başla →
