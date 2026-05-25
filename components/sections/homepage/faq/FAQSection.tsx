@@ -1,8 +1,13 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import { faqs } from './faq-list'
 import FAQItem from './FAQItem'
 
 export default function FAQSection() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
   return (
     <section id="faq" className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
       <div className="text-center">
@@ -18,8 +23,13 @@ export default function FAQSection() {
       </div>
 
       <div className="mt-8 sm:mt-10 space-y-3">
-        {faqs.map((faq) => (
-          <FAQItem key={faq.question} item={faq} />
+        {faqs.map((faq, index) => (
+          <FAQItem
+            key={faq.question}
+            item={faq}
+            isOpen={activeIndex === index}
+            onToggle={() => setActiveIndex(activeIndex === index ? null : index)}
+          />
         ))}
       </div>
 

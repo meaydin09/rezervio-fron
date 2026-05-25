@@ -1,20 +1,19 @@
 'use client'
 
-import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import type { FAQItem } from './types'
 
 interface Props {
   item: FAQItem
+  isOpen: boolean
+  onToggle: () => void
 }
 
-export default function FAQItem({ item }: Props) {
-  const [isOpen, setIsOpen] = useState(false)
-
+export default function FAQItem({ item, isOpen, onToggle }: Props) {
   return (
     <div className="bg-white rounded-xl border border-ink-100 overflow-hidden">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
         className="w-full flex items-center justify-between gap-3 p-4 sm:p-5 text-left cursor-pointer"
       >
         <span className="text-sm sm:text-base font-semibold text-ink-900 flex-1">
