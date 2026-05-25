@@ -5,7 +5,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   return (
     <>
       <Header />
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 pt-20 overflow-hidden">
         {children}
       </main>
       <Footer />
