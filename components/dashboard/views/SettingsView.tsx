@@ -4,6 +4,23 @@ import { useState } from 'react'
 import { Check } from 'lucide-react'
 
 export default function SettingsView() {
+  const defaultWorkHours = {
+  Pazartesi: { enabled: true,  start: '09:00', end: '19:00' },
+  Salı:      { enabled: true,  start: '09:00', end: '19:00' },
+  Çarşamba:  { enabled: true,  start: '09:00', end: '19:00' },
+  Perşembe:  { enabled: true,  start: '09:00', end: '19:00' },
+  Cuma:      { enabled: true,  start: '09:00', end: '19:00' },
+  Cumartesi: { enabled: false, start: '10:00', end: '16:00' },
+  Pazar:     { enabled: false, start: '10:00', end: '16:00' },
+}
+const [workHours, setWorkHours] = useState(defaultWorkHours)
+
+const updateDay = (day: string, field: 'enabled' | 'start' | 'end', value: string | boolean) => {
+  setWorkHours((prev) => ({
+    ...prev,
+    [day]: { ...prev[day as keyof typeof prev], [field]: value },
+  }))
+}
   const [saved, setSaved] = useState(false)
   const [form, setForm] = useState({
     fullName: 'Onur Uzun',
@@ -77,37 +94,85 @@ export default function SettingsView() {
         </div>
       </div>
 
-      {/* Çalışma Saatleri */}
-      <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6">
-        <h3 className="font-semibold text-ink-900 mb-5">Çalışma Saatleri & Seans</h3>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label className="text-xs font-semibold text-ink-700">Açılış Saati</label>
-            <input type="time" value={form.workStart} onChange={(e) => setForm((f) => ({ ...f, workStart: e.target.value }))} className={inputClass} />
-          </div>
-          <div>
-            <label className="text-xs font-semibold text-ink-700">Kapanış Saati</label>
-            <input type="time" value={form.workEnd} onChange={(e) => setForm((f) => ({ ...f, workEnd: e.target.value }))} className={inputClass} />
-          </div>
-          <div>
-            <label className="text-xs font-semibold text-ink-700">Seans Süresi (dk)</label>
-            <select value={form.sessionDuration} onChange={(e) => setForm((f) => ({ ...f, sessionDuration: e.target.value }))} className={`${inputClass} bg-white cursor-pointer`}>
-              {['30', '45', '50', '60', '75', '90'].map((v) => <option key={v}>{v}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="text-xs font-semibold text-ink-700">Seans Arası (dk)</label>
-            <input type="number" value={form.sessionBuffer} onChange={(e) => setForm((f) => ({ ...f, sessionBuffer: e.target.value }))} className={inputClass} />
-          </div>
-          <div>
-            <label className="text-xs font-semibold text-ink-700">Saat Dilimi</label>
-            <select value={form.timezone} onChange={(e) => setForm((f) => ({ ...f, timezone: e.target.value }))} className={`${inputClass} bg-white cursor-pointer`}>
-              <option value="Europe/Istanbul">İstanbul (UTC+3)</option>
-              <option value="Europe/London">Londra (UTC+0)</option>
-            </select>
-          </div>
+ {/* Çalışma Saatleri */}
+<div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6">
+  <h3 className="font-semibold text-ink-900 mb-1">Çalışma Saatleri & Seans</h3>
+  <p className="text-xs text-ink-500 mb-5">Her gün için çalışma saatlerini ayrı ayrı belirleyin</p>
+
+  <div className="space-y-3">
+    {Object.entries(workHours).map(([day, val]) => (
+      <div key={day} className={`grid grid-cols-[120px_1fr] sm:grid-cols-[140px_1fr] gap-3 items-center p-3 rounded-xl border transition ${
+        val.enabled ? 'border-ink-100 bg-white' : 'border-ink-100 bg-ink-50/50'
+      }`}>
+        {/* Gün toggle */}
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => updateDay(day, 'enabled', !val.enabled)}
+            className={`relative w-9 h-5 rounded-full transition cursor-pointer shrink-0 ${val.enabled ? 'bg-emerald-500' : 'bg-ink-200'}`}
+          >
+            <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all ${val.enabled ? 'right-0.5' : 'left-0.5'}`} />
+          </button>
+          <span className={`text-sm font-semibold ${val.enabled ? 'text-ink-900' : 'text-ink-400'}`}>{day}</span>
         </div>
+
+        {/* Saat seçimi */}
+        {val.enabled ? (
+          <div className="flex items-center gap-2 flex-wrap">
+            <input
+              type="time"
+              value={val.start}
+              onChange={(e) => updateDay(day, 'start', e.target.value)}
+              className="text-sm border border-ink-200 rounded-lg px-2 py-1.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+            />
+            <span className="text-ink-400 text-sm">—</span>
+            <input
+              type="time"
+              value={val.end}
+              onChange={(e) => updateDay(day, 'end', e.target.value)}
+              className="text-sm border border-ink-200 rounded-lg px-2 py-1.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+            />
+          </div>
+        ) : (
+          <span className="text-xs text-ink-400 font-medium">Kapalı</span>
+        )}
       </div>
+    ))}
+  </div>
+
+  {/* Seans ayarları */}
+  <div className="mt-5 pt-5 border-t border-ink-100 grid sm:grid-cols-3 gap-4">
+    <div>
+      <label className="text-xs font-semibold text-ink-700">Seans Süresi (dk)</label>
+      <select
+        value={form.sessionDuration}
+        onChange={(e) => setForm((f) => ({ ...f, sessionDuration: e.target.value }))}
+        className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 bg-white cursor-pointer focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+      >
+        {['30', '45', '50', '60', '75', '90'].map((v) => <option key={v}>{v}</option>)}
+      </select>
+    </div>
+    <div>
+      <label className="text-xs font-semibold text-ink-700">Seans Arası (dk)</label>
+      <input
+        type="number"
+        value={form.sessionBuffer}
+        onChange={(e) => setForm((f) => ({ ...f, sessionBuffer: e.target.value }))}
+        className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+      />
+    </div>
+    <div>
+      <label className="text-xs font-semibold text-ink-700">Saat Dilimi</label>
+      <select
+        value={form.timezone}
+        onChange={(e) => setForm((f) => ({ ...f, timezone: e.target.value }))}
+        className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 bg-white cursor-pointer focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+      >
+        <option value="Europe/Istanbul">İstanbul (UTC+3)</option>
+        <option value="Europe/London">Londra (UTC+0)</option>
+      </select>
+    </div>
+  </div>
+</div>
 
       {/* Tercihler */}
       <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6">
