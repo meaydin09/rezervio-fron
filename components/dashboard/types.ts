@@ -31,6 +31,7 @@ export interface NavItem {
   | 'support'
   | 'settings'
   | 'subscription'
+  | 'services'
   export interface TicketData {
     id: string
     status: 'open' | 'pending' | 'resolved'

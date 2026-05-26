@@ -8,10 +8,7 @@ interface Props {
 export default function SidebarUser({ onLogout }: Props) {
   return (
     <div className="mt-4 pt-3 border-t border-ink-100">
-      <Link href="/dashboard/kurumsal" className="flex items-center gap-2 px-2 py-2 text-xs text-ink-500 hover:text-ink-900 transition">
-        <ChevronRight className="w-4 h-4" strokeWidth={2} />
-        Kurumsal panele geç
-      </Link>
+      
       <div className="flex items-center gap-3 px-2 py-2">
         <div className="w-9 h-9 rounded-full bg-ink-900 flex items-center justify-center text-sm font-bold text-white shrink-0">
           OU

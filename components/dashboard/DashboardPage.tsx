@@ -23,6 +23,7 @@ import type { DashboardView } from './types'
 import WhatsAppView from './views/WhatsAppView'
 import SettingsView from './views/SettingsView'
 import SubscriptionView from './views/SubscriptionView'
+import ServicesView from './views/ServicesView'
 export default function DashboardPage() {
   const { isOpen, toggle, close } = useSidebar()
   const {
@@ -42,6 +43,7 @@ export default function DashboardPage() {
       showToast('Veriler güncellendi')
     }, 1200)
   }
+const [settingsFocus, setSettingsFocus] = useState<'education' | 'certificate' | undefined>()
 
   return (
     <div className="min-h-screen bg-ink-50">
@@ -64,7 +66,20 @@ export default function DashboardPage() {
           {activeView === 'overview' && (
             <>
               {profileBannerVisible && (
-                <ProfileCompletion onClose={() => setProfileBannerVisible(false)} />
+                <ProfileCompletion onClose={() => setProfileBannerVisible(false)} 
+                onNavigate={(view) => {
+  if (view === 'settings:education') {
+    setActiveView('settings')
+    setSettingsFocus('education')
+  } else if (view === 'settings:certificate') {
+    setActiveView('settings')
+    setSettingsFocus('certificate')
+  } else {
+    setActiveView(view as DashboardView)
+    setSettingsFocus(undefined)
+  }
+}}
+                />
               )}
               <StatsGrid />
               <div className="mt-6 grid xl:grid-cols-3 gap-6">
@@ -117,8 +132,15 @@ export default function DashboardPage() {
             </div>
           )}
 {activeView === 'whatsapp'  && <WhatsAppView />}
-{activeView === 'settings'  && <SettingsView />}
+{activeView === 'settings' && (
+  <SettingsView
+    focusSection={settingsFocus}
+    onFocusComplete={() => setSettingsFocus(undefined)}
+  />
+)}
+
 {activeView === 'subscription' && <SubscriptionView />}
+{activeView === 'services' && <ServicesView />}
         </div>
       </main>
 

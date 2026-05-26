@@ -62,7 +62,10 @@ export default function CorporateDashboardPage() {
           {activeView === 'overview' && (
             <>
               {profileBannerVisible && (
-                <ProfileCompletion onClose={() => setProfileBannerVisible(false)} />
+                <ProfileCompletion
+                  onClose={() => setProfileBannerVisible(false)}
+                  onNavigate={(view) => setActiveView(view)}
+                />
               )}
               <StatsGrid />
               <SpecialistsTable onAddSpecialist={() => setShowAddSpecialistModal(true)} />

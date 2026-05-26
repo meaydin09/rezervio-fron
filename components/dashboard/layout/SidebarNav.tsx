@@ -1,4 +1,4 @@
-import { LayoutGrid, Calendar, Users, BarChart2, MessageCircle, Settings,CreditCard  } from 'lucide-react'
+import { LayoutGrid, Calendar, Users, BarChart2, MessageCircle, Settings,CreditCard ,Briefcase  } from 'lucide-react'
 import type { DashboardView } from '../types'
 
 const navItems: {
@@ -14,7 +14,8 @@ const navItems: {
   { view: 'whatsapp',      label: 'WhatsApp & Bildirim',  icon: MessageCircle },
   { view: 'support',       label: 'Destek',               icon: MessageCircle, badge: { text: '2', color: 'bg-amber-100 text-amber-700' } },
   { view: 'settings',      label: 'Ayarlar',              icon: Settings },
-  { view: 'subscription', label: 'Aboneliğim', icon: CreditCard, badge: { text: 'Pro', color: 'bg-brand-100 text-brand-700' } }
+  { view: 'subscription', label: 'Aboneliğim', icon: CreditCard, badge: { text: 'Pro', color: 'bg-brand-100 text-brand-700' } },
+  { view: 'services', label: 'Hizmetlerim', icon: Briefcase }
 ]
 
 interface Props {

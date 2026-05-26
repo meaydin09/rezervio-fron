@@ -1,13 +1,18 @@
 import { X, Check, Plus } from 'lucide-react'
+import type { CorporateView } from '../types'
 
 interface Props {
   onClose: () => void
+  onNavigate: (view: CorporateView) => void
 }
 
 const completed = ['Firma Bilgileri', 'Logo & Marka', 'Adres & İletişim', 'Uzmanlar (12)']
-const pending = ['Hizmet Açıklamaları', 'Klinik Galerisi']
+const pending: { label: string; view: CorporateView }[] = [
+  { label: 'Hizmet Açıklamaları', view: 'services' },
+  { label: 'Klinik Galerisi',     view: 'settings'  },
+]
 
-export default function ProfileCompletion({ onClose }: Props) {
+export default function ProfileCompletion({ onClose, onNavigate }: Props) {
   return (
     <div className="mb-6 bg-gradient-to-br from-brand-50 via-violet-50 to-rose-50 rounded-2xl border border-brand-100 p-4 sm:p-5 relative overflow-hidden">
       <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-brand-200/30 to-violet-200/30 rounded-full blur-2xl" />
@@ -35,11 +40,11 @@ export default function ProfileCompletion({ onClose }: Props) {
               </div>
             ))}
             {pending.map((item) => (
-              <button key={item} className="flex items-center gap-2 p-2 rounded-lg bg-amber-50/80 border border-amber-200 hover:bg-amber-100 transition cursor-pointer text-left">
+              <button key={item.label} onClick={() => onNavigate(item.view)} className="flex items-center gap-2 p-2 rounded-lg bg-amber-50/80 border border-amber-200 hover:bg-amber-100 transition cursor-pointer text-left">
                 <div className="w-5 h-5 rounded-full border-2 border-amber-400 flex items-center justify-center shrink-0">
                   <Plus className="w-3 h-3 text-amber-600" strokeWidth={2.5} />
                 </div>
-                <span className="text-xs font-semibold text-amber-800 truncate">{item}</span>
+                <span className="text-xs font-semibold text-amber-800 truncate">{item.label}</span>
               </button>
             ))}
           </div>

@@ -125,7 +125,7 @@ export default function SubscriptionView() {
           </div>
         </div>
 
-        {/* Koltuk Artırma */}
+        {/* Koltuk Artırma 
         <div className="bg-gradient-to-br from-brand-600 to-violet-600 rounded-2xl p-6 text-white">
           <div className="flex items-start justify-between flex-wrap gap-4">
             <div>
@@ -151,7 +151,7 @@ export default function SubscriptionView() {
             </div>
           </div>
         </div>
-
+                */}
         {/* Fatura Geçmişi */}
         <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6">
           <h3 className="font-semibold text-ink-900 mb-4">Fatura Geçmişi</h3>

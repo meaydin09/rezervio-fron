@@ -34,7 +34,6 @@ export default function Sidebar({ isOpen, onClose, onLogout, activeView, onViewC
         </div>
 
         <SidebarNav active={activeView} onChange={(view) => { onViewChange(view); onClose() }} />
-        <SidebarUpgradeBanner />
         <SidebarUser onLogout={onLogout} />
       </aside>
     </>

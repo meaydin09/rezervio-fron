@@ -6,7 +6,7 @@ import { Check, Crown, AlertCircle, CreditCard, RefreshCw, X } from 'lucide-reac
 const features = [
   'Sınırsız randevu',
   'WhatsApp hatırlatma',
-  'Google Takvim entegrasyonu',
+  'Premium Panel',
   'Özel profil sayfası',
   'Detaylı istatistikler',
   '7/24 teknik destek',
@@ -108,32 +108,7 @@ export default function SubscriptionView() {
           </div>
         </div>
 
-        {/* Plan Yükseltme */}
-        <div className="bg-gradient-to-br from-brand-600 to-violet-600 rounded-2xl p-6 text-white">
-          <div className="flex items-start justify-between flex-wrap gap-4">
-            <div>
-              <h3 className="font-bold text-lg">Kurumsal'a Geç</h3>
-              <p className="text-sm text-white/80 mt-1 max-w-sm">
-                Birden fazla uzman, merkezi yönetim ve gelişmiş raporlama ile kliniğinizi büyütün.
-              </p>
-              <div className="mt-3 space-y-1">
-                {['10 uzman koltuğu', 'Merkezi yönetim paneli', 'Öncelikli destek'].map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-sm text-white/90">
-                    <Check className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
-                    {f}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold">₺1.299</div>
-              <div className="text-sm text-white/70">/ ay</div>
-              <button className="mt-3 bg-white text-brand-600 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-brand-50 transition cursor-pointer">
-                Yükselt
-              </button>
-            </div>
-          </div>
-        </div>
+       
 
         {/* Fatura Geçmişi */}
         <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6">

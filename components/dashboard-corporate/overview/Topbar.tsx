@@ -47,7 +47,7 @@ const notifRef = useRef<HTMLDivElement>(null)
           <div className="text-xs text-ink-500 font-medium">
             {new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} · NovaPsy Klinik
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight mt-0.5 truncate text-ink-900">Günaydın, NovaPsy 👋</h1>
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight mt-0.5 truncate text-ink-900">Selam, NovaPsy 👋</h1>
         </div>
       </div>
 
@@ -117,14 +117,15 @@ const notifRef = useRef<HTMLDivElement>(null)
             </div>
           )}
         </div>
-
-        <button
+        
+        {/* <button
           onClick={onAddSpecialist}
           className="bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2 shrink-0 cursor-pointer transition"
         >
           <Plus className="w-4 h-4" strokeWidth={2.5} />
           <span className="hidden sm:inline">Uzman Ekle</span>
-        </button>
+        </button> */}
+        
       </div>
     </div>
   )
