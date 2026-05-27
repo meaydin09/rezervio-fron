@@ -44,7 +44,7 @@ export default function SpecialistRow({ specialist: s, onEdit, onDelete, onStatu
             </div>
             <div className="min-w-0">
               <div className="text-sm font-semibold truncate text-ink-900">{s.name}</div>
-              <div className="text-xs text-ink-500 truncate">rezervio.com/novapsy-klinik/{s.initials.toLowerCase()}</div>
+              <div className="text-xs text-ink-500 truncate">rezervio.co/novapsy-klinik/{s.initials.toLowerCase()}</div>
             </div>
           </div>
         </td>

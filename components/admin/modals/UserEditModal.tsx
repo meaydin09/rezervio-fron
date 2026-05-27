@@ -35,7 +35,7 @@ export default function UserEditModal({ user, onClose, onSave }: Props) {
             </div>
             <div>
               <h3 className="font-bold text-lg text-ink-900">{user.name}</h3>
-              <p className="text-xs text-ink-500">rezervio.com/{user.slug} · {user.plan}</p>
+              <p className="text-xs text-ink-500">rezervio.co/{user.slug} · {user.plan}</p>
             </div>
           </div>
           <button onClick={onClose} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center cursor-pointer transition">
@@ -78,7 +78,7 @@ export default function UserEditModal({ user, onClose, onSave }: Props) {
               <div className="sm:col-span-2">
                 <label className="text-xs font-semibold text-ink-700">Kullanıcı Adı (Slug)</label>
                 <div className="mt-1 flex">
-                  <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-600 font-medium whitespace-nowrap">rezervio.com/</span>
+                  <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-600 font-medium whitespace-nowrap">rezervio.co/</span>
                   <input defaultValue={user.slug} className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0" />
                 </div>
               </div>

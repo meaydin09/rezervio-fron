@@ -3,7 +3,7 @@ import type { Feature } from './types'
 export const features: Feature[] = [
   {
     title: 'Kişisel Slug Link',
-    description: 'rezervio.com/adınız üzerinden danışanlarınızı doğrudan rezervasyon sayfanıza yönlendirin.',
+    description: 'rezervio.co/adınız üzerinden danışanlarınızı doğrudan rezervasyon sayfanıza yönlendirin.',
     iconBg: 'bg-brand-50',
     iconColor: 'text-brand-600',
     icon: 'link',

@@ -83,4 +83,11 @@ export const specialists: Specialist[] = [
   },
 ]
 
+export const filterMap: Record<string, string[]> = {
+  'Tümü':       [],
+  'Psikolog':   ['Klinik Psikolog', 'Çocuk & Ergen', 'EMDR', 'Kaygı'],
+  'Psikiyatrist': ['Psikiyatrist'],
+  'Aile Dan.':  ['Aile', 'Çift'],
+  'Çocuk':      ['Çocuk'],
+}
 export const filterChips = ['Tümü', 'Psikolog', 'Psikiyatrist', 'Aile Dan.', 'Çocuk']

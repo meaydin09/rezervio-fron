@@ -14,11 +14,11 @@ Uzmanlar üyelik satın alır, profil ve çalışma saatlerini tanımlar; ardın
 2. **Aktivasyon** — Ödeme tamamlanınca üyelik aktif hale gelir.
 3. **Profil kurulumu** — Ad, iletişim, hizmet bilgileri ve görünüm ayarlarını düzenler.
 4. **Çalışma takvimi** — Hangi günlerde ve hangi saat aralıklarında randevu kabul edeceğini seçer.
-5. **Kişisel sayfa** — Kurulum bitince `rezervio.com/{kullaniciadi}` adresinde yayına alınan randevu sayfası atanır.
+5. **Kişisel sayfa** — Kurulum bitince `rezervio.co/{kullaniciadi}` adresinde yayına alınan randevu sayfası atanır.
 
 ### Müşteri akışı
 
-1. Uzmanın paylaştığı linki açar (`rezervio.com/{kullaniciadi}`).
+1. Uzmanın paylaştığı linki açar (`rezervio.co/{kullaniciadi}`).
 2. Uygun gün ve saati seçer.
 3. Randevusunu onaylar (ileride WhatsApp hatırlatma vb. entegrasyonlar).
 
@@ -26,7 +26,7 @@ Uzmanlar üyelik satın alır, profil ve çalışma saatlerini tanımlar; ardın
 flowchart LR
   A[Kayıt ve üyelik] --> B[Profil düzenleme]
   B --> C[Çalışma günleri ve saatleri]
-  C --> D["rezervio.com/kullaniciadi"]
+  C --> D["rezervio.co/kullaniciadi"]
   D --> E[Müşteri randevu alır]
 ```
 
@@ -116,7 +116,7 @@ Backend ve ödeme entegrasyonları eklendiğinde `.env.local` örneği:
 
 ```env
 # API taban URL (örnek)
-NEXT_PUBLIC_API_URL=https://api.rezervio.com
+NEXT_PUBLIC_API_URL=https://api.rezervio.co
 
 # Ödeme / auth vb. (ileride)
 # STRIPE_SECRET_KEY=

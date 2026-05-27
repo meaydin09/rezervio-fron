@@ -24,10 +24,11 @@ export default function BookingPage() {
             />
           </div>
         </div>
+        <AboutSection />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-12">
-        <AboutSection />
+        
 
         <div className="mt-10 pt-6 border-t border-ink-100 text-center">
           <p className="text-xs text-ink-500">

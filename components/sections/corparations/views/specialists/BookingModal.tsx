@@ -75,16 +75,26 @@ export default function BookingModal({ specialistName, selectedDay, selectedTime
                 />
               </div>
               <div>
-                <label className="text-xs font-semibold text-ink-700">Telefon</label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="+90 5XX XXX XX XX"
-                  value={form.phone}
-                  onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                  className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
-                />
-              </div>
+  <label className="text-xs font-semibold text-ink-700">Telefon</label>
+  <div className="mt-1 flex">
+    <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-500 whitespace-nowrap">+90</span>
+    <input
+      type="tel"
+      required
+      placeholder="5XX XXX XX XX"
+      value={form.phone}
+      onChange={(e) => {
+        const digits = e.target.value.replace(/\D/g, '').slice(0, 10)
+        let formatted = digits
+        if (digits.length > 3) formatted = `${digits.slice(0,3)} ${digits.slice(3)}`
+        if (digits.length > 6) formatted = `${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6)}`
+        if (digits.length > 8) formatted = `${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6,8)} ${digits.slice(8)}`
+        setForm((f) => ({ ...f, phone: formatted }))
+      }}
+      className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0"
+    />
+  </div>
+</div>
 
               <div className="flex gap-2 pt-2 border-t border-ink-100">
                 <button

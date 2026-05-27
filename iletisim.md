@@ -70,13 +70,13 @@
 <div class="relative z-10">
 <h3 class="font-headline-sm text-headline-sm mb-8">İletişim Bilgileri</h3>
 <div class="space-y-6">
-<a class="flex items-center gap-5 group/item" href="mailto:destek@rezervio.com">
+<a class="flex items-center gap-5 group/item" href="mailto:destek@rezervio.co">
 <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center transition-transform group-hover/item:scale-110">
 <span class="material-symbols-outlined">mail</span>
 </div>
 <div>
 <p class="text-white/60 font-label-md text-xs uppercase tracking-widest mb-0.5">E-posta</p>
-<p class="font-body-lg">destek@rezervio.com</p>
+<p class="font-body-lg">destek@rezervio.co</p>
 </div>
 </a>
 <a class="flex items-center gap-5 group/item" href="tel:+902120000000">

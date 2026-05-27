@@ -29,7 +29,7 @@ export default function RecentRegistrations({ onViewUsers }: Props) {
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-semibold truncate text-ink-900">{user.name}</div>
-              <div className="text-xs text-ink-500 truncate">rezervio.com/{user.slug} · {user.lastSeen}</div>
+              <div className="text-xs text-ink-500 truncate">rezervio.co/{user.slug} · {user.lastSeen}</div>
             </div>
             <span className={`hidden sm:inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-full ${planBadge[user.plan]}`}>
               {user.plan}

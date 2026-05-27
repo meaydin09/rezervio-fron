@@ -51,7 +51,7 @@ export default function NewUserModal({ onClose, onCreated }: Props) {
           <div>
             <label className="text-xs font-semibold text-ink-700">Slug</label>
             <div className="mt-1 flex">
-              <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-600 font-medium whitespace-nowrap">rezervio.com/</span>
+              <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-600 font-medium whitespace-nowrap">rezervio.co/</span>
               <input type="text" placeholder="kullaniciadi" className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0" />
             </div>
           </div>

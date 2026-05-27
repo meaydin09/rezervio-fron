@@ -131,52 +131,63 @@ export default function SupportTickets({ onNewTicket }: Props) {
 
       {/* Detay Paneli */}
       {selected && (() => {
-        const msgs = ticketMessages[selected.id]
-        const cfg = statusConfig[selected.status]
-        return (
-          <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6">
-            <div className="flex items-start justify-between mb-5">
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-mono text-ink-400">{selected.id}</span>
-                  <span className={`inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-full ${cfg.color}`}>
-                    {cfg.label}
-                  </span>
-                </div>
-                <h3 className="font-bold text-lg text-ink-900">{selected.title}</h3>
-                <p className="text-xs text-ink-400 mt-0.5">{selected.meta}</p>
-              </div>
-              <button onClick={() => setSelected(null)} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center cursor-pointer">
-                <X className="w-4 h-4 text-ink-400" strokeWidth={2} />
-              </button>
+  const msgs = ticketMessages[selected.id]
+  const cfg = statusConfig[selected.status]
+  return (
+    <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelected(null)}>
+      <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="sticky top-0 bg-white border-b border-ink-100 p-5 flex items-start justify-between z-10">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xs font-mono text-ink-400">{selected.id}</span>
+              <span className={`inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-full ${cfg.color}`}>
+                {cfg.label}
+              </span>
             </div>
-
-            <div className="space-y-4">
-              <div className="bg-ink-50 rounded-xl p-4">
-                <p className="text-xs font-semibold text-ink-500 mb-1">Talebiniz</p>
-                <p className="text-sm text-ink-800">{msgs?.message}</p>
-              </div>
-
-              {msgs?.reply && (
-                <div className="bg-brand-50 border border-brand-100 rounded-xl p-4">
-                  <p className="text-xs font-semibold text-brand-600 mb-1 flex items-center gap-1">
-                    <Check className="w-3 h-3" strokeWidth={2.5} />
-                    Rezervio Destek Ekibi
-                  </p>
-                  <p className="text-sm text-ink-800">{msgs.reply}</p>
-                </div>
-              )}
-
-              {selected.status === 'pending' && (
-                <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-3">
-                  <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" strokeWidth={2} />
-                  <p className="text-xs text-amber-800">Talebiniz inceleniyor. Ortalama yanıt süresi 2-4 saattir.</p>
-                </div>
-              )}
-            </div>
+            <h3 className="font-bold text-base text-ink-900">{selected.title}</h3>
+            <p className="text-xs text-ink-400 mt-0.5">{selected.meta}</p>
           </div>
-        )
-      })()}
+          <button onClick={() => setSelected(null)} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center cursor-pointer shrink-0 ml-3">
+            <X className="w-4 h-4 text-ink-400" strokeWidth={2} />
+          </button>
+        </div>
+
+        <div className="p-5 space-y-4">
+          <div className="bg-ink-50 rounded-xl p-4">
+            <p className="text-xs font-semibold text-ink-500 mb-1">Talebiniz</p>
+            <p className="text-sm text-ink-800">{msgs?.message}</p>
+          </div>
+
+          {msgs?.reply && (
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-4">
+              <p className="text-xs font-semibold text-brand-600 mb-1 flex items-center gap-1">
+                <Check className="w-3 h-3" strokeWidth={2.5} />
+                Rezervio Destek Ekibi
+              </p>
+              <p className="text-sm text-ink-800">{msgs.reply}</p>
+            </div>
+          )}
+
+          {selected.status === 'pending' && (
+            <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-3">
+              <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" strokeWidth={2} />
+              <p className="text-xs text-amber-800">Talebiniz inceleniyor. Ortalama yanıt süresi 2-4 saattir.</p>
+            </div>
+          )}
+        </div>
+
+        <div className="sticky bottom-0 bg-white border-t border-ink-100 p-4">
+          <button
+            onClick={() => setSelected(null)}
+            className="w-full py-2.5 text-sm font-semibold bg-ink-100 hover:bg-ink-200 text-ink-800 rounded-xl cursor-pointer transition"
+          >
+            Kapat
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+})()}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import type { FAQItem } from './types'
 export const faqs: FAQItem[] = [
   {
     question: 'Rezervio nasıl çalışır?',
-    answer: 'Rezervio, randevu yönetimini tamamen otomatikleştiren bir SaaS platformudur. Hesap oluşturduktan sonra size özel bir link (rezervio.com/adınız) verilir. Bu linki danışanlarınızla paylaşırsınız ve onlar takviminizdeki müsait saatlerden randevu alır. Her randevu için otomatik WhatsApp onayı ve hatırlatması gönderilir.',
+    answer: 'Rezervio, randevu yönetimini tamamen otomatikleştiren bir SaaS platformudur. Hesap oluşturduktan sonra size özel bir link (rezervio.co/adınız) verilir. Bu linki danışanlarınızla paylaşırsınız ve onlar takviminizdeki müsait saatlerden randevu alır. Her randevu için otomatik WhatsApp onayı ve hatırlatması gönderilir.',
   },
   {
     question: 'WhatsApp hatırlatması nasıl çalışıyor?',

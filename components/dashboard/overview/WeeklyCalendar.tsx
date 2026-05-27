@@ -75,11 +75,23 @@ interface BookModalProps {
 
 function BookModal({ hour, dayLabel, onClose, onBook, onClose2 }: BookModalProps) {
   const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [service, setService] = useState('Bireysel Seans')
+  const [duration, setDuration] = useState('50')
   const [note, setNote] = useState('')
+
+  const services = ['Bireysel Seans', 'Çift Terapisi', 'İlk Görüşme', 'Online Seans', 'EMDR Seansı', 'Diğer']
+const formatPhone = (value: string) => {
+  const digits = value.replace(/\D/g, '').slice(0, 10)
+  if (digits.length <= 3) return digits
+  if (digits.length <= 6) return `${digits.slice(0,3)} ${digits.slice(3)}`
+  if (digits.length <= 8) return `${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6)}`
+  return `${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6,8)} ${digits.slice(8)}`
+}
   return (
     <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-5">
           <div>
             <h3 className="font-bold text-ink-900">Randevu Oluştur</h3>
             <p className="text-xs text-ink-500 mt-0.5">{dayLabel} · {hour}</p>
@@ -88,18 +100,87 @@ function BookModal({ hour, dayLabel, onClose, onBook, onClose2 }: BookModalProps
             <X className="w-4 h-4 text-ink-400" strokeWidth={2} />
           </button>
         </div>
+
         <div className="space-y-3">
+          {/* Ad Soyad */}
           <div>
-            <label className="text-xs font-semibold text-ink-700">Ad Soyad</label>
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Danışan adı"
-              className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none" />
+            <label className="text-xs font-semibold text-ink-700">Ad Soyad <span className="text-rose-500">*</span></label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Danışan adı"
+              className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+            />
           </div>
+
+          {/* Telefon */}
           <div>
-            <label className="text-xs font-semibold text-ink-700">Not (opsiyonel)</label>
-            <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Seans notu"
-              className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none" />
+            <label className="text-xs font-semibold text-ink-700">
+              Telefon
+              <span className="ml-1 text-[10px] font-normal text-ink-400">(opsiyonel · bilgilendirme için)</span>
+            </label>
+            <div className="mt-1 flex">
+              <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-500 whitespace-nowrap">+90</span>
+              <input
+  value={phone}
+  onChange={(e) => setPhone(formatPhone(e.target.value))}
+  placeholder="5XX XXX XX XX"
+  type="tel"
+  className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0"
+/>
+            </div>
           </div>
+
+          {/* Hizmet + Süre */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs font-semibold text-ink-700">Hizmet</label>
+              <select
+                value={service}
+                onChange={(e) => setService(e.target.value)}
+                className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 bg-white cursor-pointer focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+              >
+                {services.map((s) => <option key={s}>{s}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-ink-700">Süre</label>
+              <select
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 bg-white cursor-pointer focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+              >
+                {['30', '45', '50', '60', '75', '90'].map((d) => (
+                  <option key={d} value={d}>{d} dk</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Not */}
+          <div>
+            <label className="text-xs font-semibold text-ink-700">
+              Not
+              <span className="ml-1 text-[10px] font-normal text-ink-400">(opsiyonel)</span>
+            </label>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Seans notu veya hatırlatma..."
+              rows={2}
+              className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none resize-none"
+            />
+          </div>
+
+          {/* Bilgilendirme notu */}
+          {phone && (
+            <div className="bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 flex items-center gap-2">
+              <span className="text-emerald-600 text-[11px]">✓</span>
+              <span className="text-xs text-emerald-700">WhatsApp hatırlatması +90{phone} numarasına gönderilecek</span>
+            </div>
+          )}
         </div>
+
         <div className="mt-5 pt-4 border-t border-ink-100 flex flex-col gap-2">
           <button
             onClick={() => { if (name.trim()) onBook(name.trim(), note) }}
@@ -233,11 +314,14 @@ function WeekView({ offset, slots, onSlotClick }: WeekViewProps) {
                 )
 
                 if (type === 'closed') return (
-                  <div key={i} className="p-1 border-r border-ink-50">
-                    <div className="w-full h-full min-h-[52px] rounded-md border border-ink-200"
-                      style={{ backgroundImage: 'repeating-linear-gradient(45deg,#f8fafc,#f8fafc 6px,#f1f5f9 6px,#f1f5f9 12px)' }} />
-                  </div>
-                )
+  <div key={i} className="p-1 border-r border-ink-50">
+    <div
+      onClick={() => onSlotClick(key, slots[key], hour, `${day.short} ${day.date}`)}
+      className="w-full h-full min-h-[52px] rounded-md border border-ink-200 cursor-pointer hover:border-brand-300 hover:opacity-80 transition"
+      style={{ backgroundImage: 'repeating-linear-gradient(45deg,#f8fafc,#f8fafc 6px,#f1f5f9 6px,#f1f5f9 12px)' }}
+    />
+  </div>
+)
 
                 // available veya empty → müsait
                 return (
@@ -344,20 +428,23 @@ export default function WeeklyCalendar() {
   const [slots, setSlots] = useState<SlotMap>(initialSlots)
   const [bookModal, setBookModal] = useState<{ key: string; hour: string; dayLabel: string } | null>(null)
   const [viewModal, setViewModal] = useState<{ slot: Slot; hour: string; dayLabel: string } | null>(null)
+const [openModal, setOpenModal] = useState<{ key: string; hour: string; dayLabel: string } | null>(null)
 
   const handleSlotClick = (key: string, slot: Slot | null, hour: string, dayLabel: string) => {
-    if (!slot || slot.type === 'available') {
-      setBookModal({ key, hour, dayLabel })
-    } else if (slot.type === 'confirmed' || slot.type === 'pending') {
-      setViewModal({ slot, hour, dayLabel })
-    }
+  if (!slot || slot.type === 'available') {
+    setBookModal({ key, hour, dayLabel })
+  } else if (slot.type === 'confirmed' || slot.type === 'pending') {
+    setViewModal({ slot, hour, dayLabel })
+  } else if (slot.type === 'closed') {
+    setOpenModal({ key, hour, dayLabel })
   }
+}
+ const handleBook = (name: string, note: string) => {
+  if (!bookModal) return
+  setSlots((prev) => ({ ...prev, [bookModal.key]: { type: 'confirmed', name, time: bookModal.hour, note } }))
+  setBookModal(null)
+}
 
-  const handleBook = (name: string, note: string) => {
-    if (!bookModal) return
-    setSlots((prev) => ({ ...prev, [bookModal.key]: { type: 'pending', name, time: bookModal.hour, note } }))
-    setBookModal(null)
-  }
 
   const handleClose2 = () => {
     if (!bookModal) return
@@ -377,6 +464,8 @@ export default function WeeklyCalendar() {
     const today = new Date()
     return `${today.getDate()} ${monthNames[today.getMonth()]}`
   }
+
+  
 
   return (
     <div className="xl:col-span-2 bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
@@ -446,6 +535,44 @@ export default function WeeklyCalendar() {
           onClose={() => setViewModal(null)}
         />
       )}
+      {openModal && (
+  <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setOpenModal(null)}>
+    <div className="bg-white rounded-2xl shadow-xl max-w-xs w-full p-6" onClick={(e) => e.stopPropagation()}>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h3 className="font-bold text-ink-900">Kapalı Saat</h3>
+          <p className="text-xs text-ink-500 mt-0.5">{openModal.dayLabel} · {openModal.hour}</p>
+        </div>
+        <button onClick={() => setOpenModal(null)} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center cursor-pointer">
+          <X className="w-4 h-4 text-ink-400" strokeWidth={2} />
+        </button>
+      </div>
+      <p className="text-sm text-ink-600 mb-5">Bu saat kapalı olarak işaretlenmiş. Tekrar müsait yapmak ister misiniz?</p>
+      <div className="flex gap-2">
+        <button
+          onClick={() => setOpenModal(null)}
+          className="flex-1 py-2.5 text-sm font-semibold bg-ink-100 hover:bg-ink-200 text-ink-800 rounded-lg cursor-pointer transition"
+        >
+          İptal
+        </button>
+        <button
+          onClick={() => {
+            setSlots((prev) => {
+              const next = { ...prev }
+              delete next[openModal.key]
+              return next
+            })
+            setOpenModal(null)
+          }}
+          className="flex-1 py-2.5 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg cursor-pointer transition"
+        >
+          Müsait Yap
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   )
+  
 }

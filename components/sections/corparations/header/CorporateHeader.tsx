@@ -13,7 +13,7 @@ export default function CorporateHeader() {
         <div className="flex-1 min-w-0 text-center sm:text-left">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-ink-900">NovaPsy Klinik</h1>
-            <span className="w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center" title="Doğrulanmış">
+            <span className="w-5 h-5 rounded-full bg-brand-600 flex items-center justify-center" title="Doğrulanmış">
               <Check className="w-3 h-3 text-white" strokeWidth={3.5} />
             </span>
           </div>

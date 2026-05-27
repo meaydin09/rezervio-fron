@@ -34,7 +34,7 @@ export default function StepSlug({ form, onUpdate, onBack }: Props) {
           <label className="text-xs font-semibold text-ink-700">Senin Linkin</label>
           <div className="mt-1 flex">
             <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-600 font-medium whitespace-nowrap">
-              rezervio.com/
+              rezervio.co/
             </span>
             <input
               type="text"
@@ -62,7 +62,7 @@ export default function StepSlug({ form, onUpdate, onBack }: Props) {
             <div>
               <div className="text-sm font-semibold text-ink-900">{displayName}</div>
               <div className="text-[11px] text-ink-500 font-mono">
-                rezervio.com/{form.slug || 'onuruzun'}
+                rezervio.co/{form.slug || 'onuruzun'}
               </div>
             </div>
           </div>

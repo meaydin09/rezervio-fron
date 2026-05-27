@@ -2,7 +2,7 @@ import { Mail, Phone, MapPin } from 'lucide-react'
 import type { ContactInfoItem } from '../types'
 
 const items: ContactInfoItem[] = [
-  { label: 'E-posta',  value: 'destek@rezervio.com',                href: 'mailto:destek@rezervio.com', icon: 'mail'     },
+  { label: 'E-posta',  value: 'destek@rezervio.co',                href: 'mailto:destek@rezervio.co', icon: 'mail'     },
   { label: 'Telefon',  value: '+90 (212) 555 01 23',                href: 'tel:+902125550123',           icon: 'phone'    },
   { label: 'Ofis',     value: 'Levent, Büyükdere Cad. No:199, İstanbul',                                  icon: 'location' },
 ]

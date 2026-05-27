@@ -8,7 +8,7 @@ export const aboutContent = {
       },
       {
         heading: null,
-        text: 'Geleneksel telefon ve WhatsApp üzerinden randevu organize etmenin getirdiği karmaşıklık, kaçırılan saatler ve takip zorluklarının yerine; Rezervio ile danışanlarınız rezervio.com/kullaniciadiniz şeklinde size özel bir link üzerinden 7/24 randevu alabilir.',
+        text: 'Geleneksel telefon ve WhatsApp üzerinden randevu organize etmenin getirdiği karmaşıklık, kaçırılan saatler ve takip zorluklarının yerine; Rezervio ile danışanlarınız rezervio.co/kullaniciadiniz şeklinde size özel bir link üzerinden 7/24 randevu alabilir.',
       },
       {
         heading: 'Bireysel Uzmanlar ve Kurumsal Yapılar İçin Tek Çözüm',

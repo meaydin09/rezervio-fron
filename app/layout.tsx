@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Rezervio — Modern Randevu Platformu',
   description: 'Psikologlar, diyetisyenler, kuaförler için akıllı randevu yönetimi.',
-  metadataBase: new URL('https://rezervio.com'),
+  metadataBase: new URL('https://rezervio.co'),
   alternates: { canonical: '/' },
   icons: {
     icon: '/favicon.png',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Rezervio — Modern Randevu Platformu',
     description: 'Psikologlar, diyetisyenler, kuaförler için akıllı randevu yönetimi.',
-    url: 'https://rezervio.com',
+    url: 'https://rezervio.co',
     siteName: 'Rezervio',
     locale: 'tr_TR',
     type: 'website',

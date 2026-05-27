@@ -13,7 +13,7 @@ const types = [
     emoji: '👤',
     title: 'Bireysel',
     description: 'Tek başına çalışan uzmanlar için. Kendi adına özel link.',
-    features: ['rezervio.com/adın', 'Tek kişilik takvim', 'Hızlı kurulum'],
+    features: ['rezervio.co/adın', 'Tek kişilik takvim', 'Hızlı kurulum'],
     badge: null,
   },
   {
@@ -21,7 +21,7 @@ const types = [
     emoji: '🏢',
     title: 'Kurumsal',
     description: 'Birden çok uzmanı yöneten klinikler, salonlar ve şirketler için.',
-    features: ['rezervio.com/firma', 'Çoklu uzman takvimi', 'Merkezi yönetim'],
+    features: ['rezervio.co/firma', 'Çoklu uzman takvimi', 'Merkezi yönetim'],
     badge: '+ Pro',
   },
 ]

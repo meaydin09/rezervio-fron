@@ -39,13 +39,7 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
             <h3 className="text-base sm:text-lg font-bold truncate text-ink-900">{specialist.name}</h3>
             <div className="text-xs text-ink-500">{specialist.specialty}</div>
           </div>
-          <Link
-            href={`/${specialist.initials.toLowerCase()}`}
-            className="text-xs font-semibold text-brand-600 hover:underline hidden sm:inline-flex items-center gap-1 shrink-0"
-          >
-            Tam profil
-            <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
-          </Link>
+         
         </div>
 
         <SpecialistDayStrip selectedDay={selectedDay} onPickDay={onPickDay} />
@@ -83,7 +77,7 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
         </button>
       </div>
 
-      <div className="mt-5 grid grid-cols-3 gap-3">
+      {/* <div className="mt-5 grid grid-cols-3 gap-3">
         {[
           { label: 'Deneyim', value: specialist.experience, color: 'text-brand-600' },
           { label: 'Puan',    value: `${specialist.rating} ★`, color: 'text-brand-600' },
@@ -94,7 +88,7 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
             <div className={`text-lg font-bold mt-0.5 ${stat.color}`}>{stat.value}</div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {showModal && (
         <BookingModal

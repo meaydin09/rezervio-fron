@@ -106,7 +106,7 @@ const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
             <div>
               <label className="text-xs font-semibold text-ink-700">Profil URL</label>
               <div className="mt-1 flex">
-                <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-500 whitespace-nowrap">rezervio.com/</span>
+                <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-500 whitespace-nowrap">rezervio.co/</span>
                 <input value={form.slug} onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))}
                   className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0" />
               </div>
@@ -166,7 +166,7 @@ const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
             </div>
 
             <p className="text-[11px] text-ink-400 text-center">
-              Logonuz rezervio.com/{form.slug} adresinde görünür.
+              Logonuz rezervio.co/{form.slug} adresinde görünür.
             </p>
           </div>
         </div>
@@ -289,7 +289,7 @@ const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 
   {galleryImages.length > 0 && (
     <p className="text-[11px] text-ink-400 mt-3">
-      Fotoğraflar rezervio.com/novapsy-klinik profilinizde görünür. Sürükleyerek sıralayabilirsiniz.
+      Fotoğraflar rezervio.co/novapsy-klinik profilinizde görünür. Sürükleyerek sıralayabilirsiniz.
     </p>
   )}
 </div>

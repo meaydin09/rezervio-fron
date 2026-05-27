@@ -15,7 +15,7 @@ export default function SidebarUser({ onLogout }: Props) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold truncate text-ink-900">Onur Uzun</div>
-          <div className="text-xs text-ink-500 truncate">rezervio.com/onuruzun</div>
+          <div className="text-xs text-ink-500 truncate">rezervio.co/onuruzun</div>
         </div>
       </div>
       <button

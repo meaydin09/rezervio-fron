@@ -1,7 +1,7 @@
 import type { AdminUser } from '../types'
 
 export const users: AdminUser[] = [
-  { initials: 'OU', name: 'Psk. Onur Uzun',  email: 'onur@rezervio.com',     slug: 'onuruzun',        plan: 'Profesyonel', status: 'Aktif',           mrr: '₺699',   appointments: 142, lastSeen: '2 dk önce',  bgColor: 'bg-ink-900'     },
+  { initials: 'OU', name: 'Psk. Onur Uzun',  email: 'onur@rezervio.co',     slug: 'onuruzun',        plan: 'Profesyonel', status: 'Aktif',           mrr: '₺699',   appointments: 142, lastSeen: '2 dk önce',  bgColor: 'bg-ink-900'     },
   { initials: 'NK', name: 'NovaPsy Klinik',  email: 'info@novapsy.com',      slug: 'novapsy-klinik',  plan: 'Kurumsal',    status: 'Aktif',           mrr: '₺1.299', appointments: 847, lastSeen: '15 dk önce', bgColor: 'bg-rose-600'    },
   { initials: 'SA', name: 'Selma Aydın',     email: 'selma@diyetsel.co',     slug: 'diyetisyenselma', plan: 'Deneme',      status: 'Deneme',          mrr: '₺0',     appointments: 8,   lastSeen: '23 dk önce', bgColor: 'bg-emerald-600' },
   { initials: 'AT', name: 'Av. Ahmet Tekin', email: 'ahmet@tekinhukuk.com',  slug: 'avahmettekin',    plan: 'Profesyonel', status: 'Aktif',           mrr: '₺699',   appointments: 64,  lastSeen: '2 sa önce',  bgColor: 'bg-sky-600'     },

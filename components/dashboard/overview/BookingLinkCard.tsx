@@ -2,7 +2,7 @@ import { Copy, Share2 } from 'lucide-react'
 
 export default function BookingLinkCard() {
   const handleCopy = () => {
-    navigator.clipboard.writeText('https://rezervio.com/onuruzun')
+    navigator.clipboard.writeText('https://rezervio.co/onuruzun')
   }
 
   return (
@@ -11,7 +11,7 @@ export default function BookingLinkCard() {
         Rezervasyon Linkin
       </div>
       <div className="mt-2 text-sm font-mono bg-white/10 rounded-lg p-3 break-all">
-        rezervio.com/onuruzun
+        rezervio.co/onuruzun
       </div>
       <div className="mt-3 flex gap-2">
         <button

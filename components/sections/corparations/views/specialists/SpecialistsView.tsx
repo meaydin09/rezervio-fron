@@ -4,7 +4,7 @@ import SpecialistDetail from './SpecialistDetail'
 
 export default function SpecialistsView() {
   const {
-    selected, selectedDay, slots, activeFilter,
+    selected, selectedDay, slots, activeFilter, filteredSpecialists,
     pickSpecialist, pickDay, pickSlot, setActiveFilter,
   } = useSpecialistSelect()
 
@@ -13,6 +13,7 @@ export default function SpecialistsView() {
       <SpecialistList
         selected={selected}
         activeFilter={activeFilter}
+        filteredSpecialists={filteredSpecialists}
         onSelect={pickSpecialist}
         onFilterChange={setActiveFilter}
       />

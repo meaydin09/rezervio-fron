@@ -1,7 +1,7 @@
 'use client'
 
-import { useState,  useEffect, useRef } from 'react'
-import { Check, Upload, Plus, X, GraduationCap, Award } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Check, Upload, Plus, X, GraduationCap, Award, Trash2 } from 'lucide-react'
 
 interface Props {
   focusSection?: 'education' | 'certificate'
@@ -21,34 +21,34 @@ interface Certificate {
   issuer: string
   year: string
 }
+
 export default function SettingsView({ focusSection, onFocusComplete }: Props) {
+  const educationRef = useRef<HTMLDivElement>(null)
+  const certificateRef = useRef<HTMLDivElement>(null)
 
-  
-const educationRef = useRef<HTMLDivElement>(null)
-const certificateRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (focusSection === 'education' && educationRef.current) {
+      setTimeout(() => {
+        educationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        educationRef.current?.classList.add('ring-2', 'ring-brand-400', 'ring-offset-2')
+        setTimeout(() => {
+          educationRef.current?.classList.remove('ring-2', 'ring-brand-400', 'ring-offset-2')
+          onFocusComplete?.()
+        }, 2000)
+      }, 100)
+    }
+    if (focusSection === 'certificate' && certificateRef.current) {
+      setTimeout(() => {
+        certificateRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        certificateRef.current?.classList.add('ring-2', 'ring-amber-400', 'ring-offset-2')
+        setTimeout(() => {
+          certificateRef.current?.classList.remove('ring-2', 'ring-amber-400', 'ring-offset-2')
+          onFocusComplete?.()
+        }, 2000)
+      }, 100)
+    }
+  }, [focusSection])
 
-useEffect(() => {
-  if (focusSection === 'education' && educationRef.current) {
-    setTimeout(() => {
-      educationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      educationRef.current?.classList.add('ring-2', 'ring-brand-400', 'ring-offset-2')
-      setTimeout(() => {
-        educationRef.current?.classList.remove('ring-2', 'ring-brand-400', 'ring-offset-2')
-        onFocusComplete?.()
-      }, 2000)
-    }, 100)
-  }
-  if (focusSection === 'certificate' && certificateRef.current) {
-    setTimeout(() => {
-      certificateRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      certificateRef.current?.classList.add('ring-2', 'ring-amber-400', 'ring-offset-2')
-      setTimeout(() => {
-        certificateRef.current?.classList.remove('ring-2', 'ring-amber-400', 'ring-offset-2')
-        onFocusComplete?.()
-      }, 2000)
-    }, 100)
-  }
-}, [focusSection])
   const defaultWorkHours = {
     Pazartesi: { enabled: true,  start: '09:00', end: '19:00' },
     Salı:      { enabled: true,  start: '09:00', end: '19:00' },
@@ -76,7 +76,7 @@ useEffect(() => {
     fullName: 'Onur Uzun',
     title: 'Psk.',
     slug: 'onuruzun',
-    email: 'onur@rezervio.com',
+    email: 'onur@rezervio.co',
     phone: '+90 5XX 123 45 67',
     specialty: 'Klinik Psikolog',
     bio: 'İstanbul Üniversitesi mezunu, 8 yıllık deneyimli klinik psikolog.',
@@ -155,8 +155,9 @@ useEffect(() => {
             <div>
               <label className="text-xs font-semibold text-ink-700">Profil URL</label>
               <div className="mt-1 flex">
-                <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-500 whitespace-nowrap">rezervio.com/</span>
-                <input value={form.slug} onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))} className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0" />
+                <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-500 whitespace-nowrap">rezervio.co/</span>
+                <input value={form.slug} onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))}
+                  className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0" />
               </div>
             </div>
             <div className="sm:col-span-2">
@@ -174,9 +175,7 @@ useEffect(() => {
               {profilePhoto ? (
                 <img src={profilePhoto} alt="Profil" className="w-28 h-28 rounded-2xl object-cover border-2 border-ink-100" />
               ) : (
-                <div className="w-28 h-28 rounded-2xl bg-ink-900 flex items-center justify-center text-white text-3xl font-bold">
-                  OU
-                </div>
+                <div className="w-28 h-28 rounded-2xl bg-ink-900 flex items-center justify-center text-white text-3xl font-bold">OU</div>
               )}
               {profilePhoto && (
                 <button onClick={() => setProfilePhoto(null)} className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-rose-500 flex items-center justify-center text-white cursor-pointer shadow">
@@ -184,7 +183,6 @@ useEffect(() => {
                 </button>
               )}
             </div>
-
             <div className="w-full">
               <label className="w-full border-2 border-dashed border-ink-200 hover:border-brand-300 rounded-xl p-4 text-center hover:bg-brand-50/50 transition cursor-pointer flex flex-col items-center gap-2 block">
                 <Upload className="w-5 h-5 text-ink-400" strokeWidth={2} />
@@ -202,10 +200,7 @@ useEffect(() => {
                 />
               </label>
             </div>
-
-            <p className="text-[11px] text-ink-400 text-center">
-              Profil fotoğrafınız rezervio.com/{form.slug} adresinde görünür.
-            </p>
+            <p className="text-[11px] text-ink-400 text-center">Profil fotoğrafınız rezervio.co/{form.slug} adresinde görünür.</p>
           </div>
         </div>
       </div>
@@ -218,12 +213,13 @@ useEffect(() => {
           <h3 className="font-semibold text-ink-900 mb-1">Çalışma Saatleri & Seans</h3>
           <p className="text-xs text-ink-500 mb-5">Her gün için çalışma saatlerini ayrı ayrı belirleyin</p>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             {Object.entries(workHours).map(([day, val]) => (
-              <div key={day} className={`grid grid-cols-[140px_1fr] gap-3 items-center p-3 rounded-xl border transition ${
+              <div key={day} className={`flex flex-wrap items-center gap-3 p-3 rounded-xl border transition ${
                 val.enabled ? 'border-ink-100 bg-white' : 'border-ink-100 bg-ink-50/50'
               }`}>
-                <div className="flex items-center gap-2.5">
+                {/* Toggle + gün adı */}
+                <div className="flex items-center gap-2.5 min-w-[130px]">
                   <button
                     onClick={() => updateDay(day, 'enabled', !val.enabled)}
                     className={`relative w-9 h-5 rounded-full transition cursor-pointer shrink-0 ${val.enabled ? 'bg-emerald-500' : 'bg-ink-200'}`}
@@ -232,8 +228,10 @@ useEffect(() => {
                   </button>
                   <span className={`text-sm font-semibold ${val.enabled ? 'text-ink-900' : 'text-ink-400'}`}>{day}</span>
                 </div>
+
+                {/* Saat seçimi */}
                 {val.enabled ? (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <input type="time" value={val.start} onChange={(e) => updateDay(day, 'start', e.target.value)}
                       className="text-sm border border-ink-200 rounded-lg px-2 py-1.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none" />
                     <span className="text-ink-400 text-sm">—</span>
@@ -247,7 +245,7 @@ useEffect(() => {
             ))}
           </div>
 
-          <div className="mt-5 pt-5 border-t border-ink-100 grid grid-cols-3 gap-4">
+          <div className="mt-5 pt-5 border-t border-ink-100 grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="text-xs font-semibold text-ink-700">Seans Süresi (dk)</label>
               <select value={form.sessionDuration} onChange={(e) => setForm((f) => ({ ...f, sessionDuration: e.target.value }))}
@@ -272,10 +270,10 @@ useEffect(() => {
         </div>
 
         {/* Eğitim & Sertifika */}
-        <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6 flex flex-col gap-6 overflow-y-auto">
+        <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-6 flex flex-col gap-6">
 
           {/* Eğitim */}
-          <div className="transition-all rounded-xl" ref={educationRef}>
+          <div ref={educationRef} className="transition-all rounded-xl">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <GraduationCap className="w-4 h-4 text-brand-600" strokeWidth={2} />
@@ -287,9 +285,13 @@ useEffect(() => {
             </div>
             <div className="space-y-3">
               {educations.map((edu) => (
-                <div key={edu.id} className="relative p-3 rounded-xl border border-ink-100 bg-ink-50/40 space-y-2">
-                  <button onClick={() => removeEducation(edu.id)} className="absolute top-2 right-2 w-5 h-5 rounded flex items-center justify-center text-ink-400 hover:text-rose-500 cursor-pointer transition">
-                    <X className="w-3.5 h-3.5" strokeWidth={2} />
+                <div key={edu.id} className="relative p-3 pt-4 rounded-xl border border-ink-100 bg-ink-50/40 space-y-2">
+                  {/* Silme butonu - dış sağ üst köşe */}
+                  <button
+                    onClick={() => removeEducation(edu.id)}
+                    className="absolute -top-2.5 -right-2.5 w-6 h-6 rounded-full bg-rose-100 hover:bg-rose-500 border border-rose-200 hover:border-rose-500 flex items-center justify-center text-rose-500 hover:text-white cursor-pointer transition shadow-sm"
+                  >
+                    <Trash2 className="w-3 h-3" strokeWidth={2.5} />
                   </button>
                   <input placeholder="Okul adı" value={edu.school} onChange={(e) => updateEducation(edu.id, 'school', e.target.value)}
                     className="w-full text-xs border border-ink-200 rounded-lg px-2.5 py-1.5 focus:border-brand-500 outline-none bg-white" />
@@ -318,9 +320,13 @@ useEffect(() => {
             </div>
             <div className="space-y-3">
               {certificates.map((cert) => (
-                <div key={cert.id} className="relative p-3 rounded-xl border border-ink-100 bg-ink-50/40 space-y-2">
-                  <button onClick={() => removeCertificate(cert.id)} className="absolute top-2 right-2 w-5 h-5 rounded flex items-center justify-center text-ink-400 hover:text-rose-500 cursor-pointer transition">
-                    <X className="w-3.5 h-3.5" strokeWidth={2} />
+                <div key={cert.id} className="relative p-3 pt-4 rounded-xl border border-ink-100 bg-ink-50/40 space-y-2">
+                  {/* Silme butonu - dış sağ üst köşe */}
+                  <button
+                    onClick={() => removeCertificate(cert.id)}
+                    className="absolute -top-2.5 -right-2.5 w-6 h-6 rounded-full bg-rose-100 hover:bg-rose-500 border border-rose-200 hover:border-rose-500 flex items-center justify-center text-rose-500 hover:text-white cursor-pointer transition shadow-sm"
+                  >
+                    <Trash2 className="w-3 h-3" strokeWidth={2.5} />
                   </button>
                   <input placeholder="Sertifika adı" value={cert.name} onChange={(e) => updateCertificate(cert.id, 'name', e.target.value)}
                     className="w-full text-xs border border-ink-200 rounded-lg px-2.5 py-1.5 focus:border-brand-500 outline-none bg-white" />
@@ -333,7 +339,11 @@ useEffect(() => {
               {certificates.length === 0 && <p className="text-xs text-ink-400 text-center py-2">Henüz sertifika eklenmedi</p>}
             </div>
 
-            
+            <label className="mt-3 w-full border border-dashed border-ink-200 hover:border-amber-300 rounded-xl p-3 text-center hover:bg-amber-50/50 transition cursor-pointer flex items-center justify-center gap-2 block">
+              <Upload className="w-4 h-4 text-ink-400" strokeWidth={2} />
+              <span className="text-xs text-ink-500">Sertifika dosyası yükle (PDF)</span>
+              <input type="file" accept=".pdf,image/*" className="hidden" />
+            </label>
           </div>
         </div>
       </div>

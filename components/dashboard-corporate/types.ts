@@ -7,6 +7,7 @@ export interface Specialist {
     mrr: string
     fillRate: number
     status: 'Aktif' | 'İzinli' | 'Pasif'
+    serviceIds?: number[]  // hangi hizmetleri verebilir
   }
   
   export interface HeatmapRow {

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { specialists } from '../data/specialists-data'
+import { useState, useMemo } from 'react'
+import { specialists, filterMap } from '../data/specialists-data'
 import type { Specialist, TimeSlot } from '../types'
 
 const INITIAL_SLOTS: TimeSlot[] = [
@@ -12,9 +12,18 @@ const INITIAL_SLOTS: TimeSlot[] = [
 
 export function useSpecialistSelect() {
   const [selected, setSelected] = useState<Specialist>(specialists[0])
-  const [selectedDay, setSelectedDay] = useState(15)
+  const today = new Date().getDate()
+  const [selectedDay, setSelectedDay] = useState(today)
   const [slots, setSlots] = useState<TimeSlot[]>(INITIAL_SLOTS)
   const [activeFilter, setActiveFilter] = useState('Tümü')
+
+  const filteredSpecialists = useMemo(() => {
+    if (activeFilter === 'Tümü') return specialists
+    const keywords = filterMap[activeFilter] ?? []
+    return specialists.filter((s) =>
+      keywords.some((kw) => s.specialty.toLowerCase().includes(kw.toLowerCase()))
+    )
+  }, [activeFilter])
 
   const pickSpecialist = (specialist: Specialist) => setSelected(specialist)
 
@@ -37,6 +46,7 @@ export function useSpecialistSelect() {
     selectedDay,
     slots,
     activeFilter,
+    filteredSpecialists,
     pickSpecialist,
     pickDay,
     pickSlot,

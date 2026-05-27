@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import type { TicketData } from '../types'
 
 interface Props {
@@ -40,7 +40,7 @@ export default function TicketCard({ ticket }: Props) {
             {ticket.rating && <><span>·</span><span className="text-amber-600">{ticket.rating}</span></>}
           </div>
         </div>
-        <ChevronRight className="w-4 h-4 text-ink-400 shrink-0 mt-1" strokeWidth={2} />
+        <ExternalLink className="w-4 h-4 text-ink-400 shrink-0 mt-1" strokeWidth={2} />
       </div>
     </div>
   )
