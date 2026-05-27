@@ -308,11 +308,49 @@ export default function TeamCalendar() {
                   const key = `${hour}-${i}`
                   const dayLabel = `${day.short} ${day.date}`
 
-                  if (day.past) return (
-                    <div key={i} className="p-1 border-r border-ink-50">
-                      <div className="w-full h-full min-h-[52px] rounded-md bg-ink-50 opacity-40" />
-                    </div>
-                  )
+                  if (day.past) {
+  // Tüm uzmanlar modu - geçmiş
+  if (selectedSpecialist === 'ALL') {
+    const entries = getAllSlotsForKey(key, allSlots)
+    if (entries.length > 0) return (
+      <div key={i} className="p-1 border-r border-ink-50">
+        <div className="w-full h-full min-h-[52px] rounded-md bg-ink-100 border border-ink-200 p-1.5 opacity-60 cursor-default">
+          <div className="flex flex-wrap gap-0.5">
+            {entries.slice(0, 3).map((e) => (
+              <span key={e.initials} className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-ink-400 text-white text-[9px] font-bold">
+                {e.initials.slice(0, 1)}
+              </span>
+            ))}
+            {entries.length > 3 && <span className="text-[10px] text-ink-400 font-semibold">+{entries.length - 3}</span>}
+          </div>
+          <div className="text-[10px] font-semibold mt-0.5 text-ink-400">{entries.length} randevu</div>
+        </div>
+      </div>
+    )
+    return (
+      <div key={i} className="p-1 border-r border-ink-50">
+        <div className="w-full h-full min-h-[52px] rounded-md bg-ink-50 opacity-40" />
+      </div>
+    )
+  }
+
+  // Tekil uzman modu - geçmiş
+  const pastSlot = currentSlots[key]
+  if (pastSlot?.type === 'confirmed' || pastSlot?.type === 'pending') return (
+    <div key={i} className="p-1 border-r border-ink-50">
+      <div className="w-full h-full min-h-[52px] rounded-md bg-ink-100 border border-ink-200 text-ink-400 p-1.5 opacity-60 cursor-default">
+        <div className="text-[11px] font-semibold truncate">{pastSlot.name}</div>
+        <div className="text-[10px] opacity-70">{hour}</div>
+      </div>
+    </div>
+  )
+
+  return (
+    <div key={i} className="p-1 border-r border-ink-50">
+      <div className="w-full h-full min-h-[52px] rounded-md bg-ink-50 opacity-40" />
+    </div>
+  )
+}
 
                   // Tüm uzmanlar modu
                   if (selectedSpecialist === 'ALL') {
