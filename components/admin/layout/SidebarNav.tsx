@@ -2,7 +2,7 @@ import type { AdminView } from '../types'
 import {
   LayoutGrid, Users, CreditCard, Calendar,
   DollarSign, Megaphone, MessageCircle,
-  FileText, Settings,
+  FileText, Settings, ShieldCheck, HelpCircle,
 } from 'lucide-react'
 
 interface NavItem {
@@ -33,8 +33,16 @@ const sections = [
   {
     label: 'Sistem',
     items: [
-      { view: 'audit'    as AdminView, label: 'İşlem Geçmişi',  icon: FileText  },
-      { view: 'settings' as AdminView, label: 'Sistem Ayarları', icon: Settings  },
+      { view: 'audit'    as AdminView, label: 'İşlem Geçmişi',   icon: FileText   },
+      { view: 'settings' as AdminView, label: 'Sistem Ayarları', icon: Settings   },
+    ],
+  },
+  {
+    label: 'İçerik',
+    items: [
+      { view: 'kvkk'    as AdminView, label: 'KVKK Metni',       icon: ShieldCheck },
+      { view: 'privacy' as AdminView, label: 'Gizlilik Politikası', icon: FileText },
+      { view: 'faq'     as AdminView, label: 'SSS',              icon: HelpCircle  },
     ],
   },
 ]

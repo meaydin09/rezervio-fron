@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import { X } from 'lucide-react'
 
 interface Props {
@@ -6,6 +9,8 @@ interface Props {
 }
 
 export default function NewUserModal({ onClose, onCreated }: Props) {
+  const [accountType, setAccountType] = useState<'bireysel' | 'kurumsal'>('bireysel')
+
   return (
     <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
       <div className="bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(79,70,229,0.25)] max-w-lg w-full">
@@ -23,10 +28,16 @@ export default function NewUserModal({ onClose, onCreated }: Props) {
           <div>
             <label className="text-xs font-semibold text-ink-700">Hesap Türü</label>
             <div className="mt-2 grid grid-cols-2 gap-2">
-              <button className="border-2 border-brand-500 bg-brand-50 rounded-xl p-3 text-left cursor-pointer">
+              <button
+                onClick={() => setAccountType('bireysel')}
+                className={`border-2 rounded-xl p-3 text-left cursor-pointer transition ${accountType === 'bireysel' ? 'border-brand-500 bg-brand-50' : 'border-ink-200 hover:border-brand-300'}`}
+              >
                 <div className="text-sm font-semibold text-ink-900">👤 Bireysel</div>
               </button>
-              <button className="border-2 border-ink-200 hover:border-brand-300 rounded-xl p-3 text-left cursor-pointer transition">
+              <button
+                onClick={() => setAccountType('kurumsal')}
+                className={`border-2 rounded-xl p-3 text-left cursor-pointer transition ${accountType === 'kurumsal' ? 'border-brand-500 bg-brand-50' : 'border-ink-200 hover:border-brand-300'}`}
+              >
                 <div className="text-sm font-semibold text-ink-900">🏢 Kurumsal</div>
               </button>
             </div>

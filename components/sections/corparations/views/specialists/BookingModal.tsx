@@ -7,12 +7,14 @@ interface Props {
   specialistName: string
   selectedDay: number
   selectedTime: string
+  services?: string[]
   onClose: () => void
 }
 
-export default function BookingModal({ specialistName, selectedDay, selectedTime, onClose }: Props) {
+export default function BookingModal({ specialistName, selectedDay, selectedTime, services, onClose }: Props) {
   const [step, setStep] = useState<'form' | 'success'>('form')
   const [form, setForm] = useState({ name: '', email: '', phone: '' })
+  const [selectedService, setSelectedService] = useState<string>('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,8 +25,8 @@ export default function BookingModal({ specialistName, selectedDay, selectedTime
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl max-w-md w-full overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-xl w-full sm:max-w-md overflow-hidden max-h-[90vh] overflow-y-auto">
 
         {step === 'form' ? (
           <>
@@ -51,18 +53,39 @@ export default function BookingModal({ specialistName, selectedDay, selectedTime
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-5 space-y-4">
+                      <form onSubmit={handleSubmit} className="p-5 space-y-4">
+            {/* Service selection */}
+            {services && services.length > 0 && (
               <div>
-                <label className="text-xs font-semibold text-ink-700">Ad Soyad</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Adınız ve soyadınız"
-                  value={form.name}
-                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                <label className="text-xs font-semibold text-ink-700">Hizmet</label>
+                <select
                   className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
-                />
+                  value={selectedService}
+                  onChange={(e) => setSelectedService(e.target.value)}
+                  required
+                >
+                  <option value="" disabled>
+                    Hizmet seçin
+                  </option>
+                  {services.map((svc) => (
+                    <option key={svc} value={svc}>
+                      {svc}
+                    </option>
+                  ))}
+                </select>
               </div>
+            )}
+            <div>
+              <label className="text-xs font-semibold text-ink-700">Ad Soyad</label>
+              <input
+                type="text"
+                required
+                placeholder="Adınız ve soyadınız"
+                value={form.name}
+                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                className="mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none"
+              />
+            </div>
               <div>
                 <label className="text-xs font-semibold text-ink-700">E-posta</label>
                 <input

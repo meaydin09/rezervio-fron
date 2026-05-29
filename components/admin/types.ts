@@ -8,6 +8,9 @@ export type AdminView =
   | 'support'
   | 'audit'
   | 'settings'
+  | 'kvkk'
+  | 'privacy'
+  | 'faq'
 
 export interface AdminUser {
   initials: string

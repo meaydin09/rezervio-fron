@@ -19,7 +19,7 @@ export default function CorporateActions() {
   }
 
   return (
-    <div className="flex sm:flex-col gap-2 justify-center">
+    <div className="flex flex-row sm:flex-col gap-2 justify-center shrink-0">
       <button
         onClick={handleShare}
         title={copied ? 'Kopyalandı!' : 'Paylaş'}

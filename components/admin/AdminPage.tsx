@@ -12,6 +12,9 @@ import AnnouncementsView from './views/announcements/AnnouncementsView'
 import SupportView from './views/support/SupportView'
 import AuditView from './views/audit/AuditView'
 import SettingsView from './views/settings/SettingsView'
+import KvkkView from './views/legal/KvkkView'
+import PrivacyView from './views/legal/PrivacyView'
+import FaqView from './views/legal/FaqView'
 import UserEditModal from './modals/UserEditModal'
 import NewUserModal from './modals/NewUserModal'
 import Toast from './modals/Toast'
@@ -74,6 +77,9 @@ export default function AdminPage() {
         {activeView === 'support'       && <SupportView />}
         {activeView === 'audit'         && <AuditView />}
         {activeView === 'settings'      && <SettingsView />}
+        {activeView === 'kvkk'          && <KvkkView />}
+        {activeView === 'privacy'       && <PrivacyView />}
+        {activeView === 'faq'           && <FaqView />}
         </div>
 
       </main>

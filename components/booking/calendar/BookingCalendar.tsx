@@ -1,14 +1,25 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import CalendarGrid from './CalendarGrid'
 import TimeSlots from './TimeSlots'
-import { useCalendar } from './hooks/useCalendar'
+import type { TimeSlot } from '../types'
 
-export default function BookingCalendar() {
-  const {
-    selectedDay, slots, pickDate, pickSlot,
-    getFormattedDate, FIRST_DAY_COL, DAYS_IN_MONTH, TODAY, AVAIL, FULL,
-  } = useCalendar()
+interface Props {
+  selectedDay: number
+  slots: TimeSlot[]
+  today: number
+  firstDayCol: number
+  daysInMonth: number
+  avail: Set<number>
+  full: Set<number>
+  getFormattedDate: (day: number) => string
+  onPickDate: (day: number) => void
+  onPickSlot: (time: string) => void
+}
 
+export default function BookingCalendar({
+  selectedDay, slots, today, firstDayCol, daysInMonth, avail, full,
+  getFormattedDate, onPickDate, onPickSlot,
+}: Props) {
   return (
     <div className="lg:col-span-7 bg-white rounded-2xl shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] border border-ink-100 p-5 sm:p-6">
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
@@ -29,12 +40,12 @@ export default function BookingCalendar() {
 
       <CalendarGrid
         selectedDay={selectedDay}
-        today={TODAY}
-        firstDayCol={FIRST_DAY_COL}
-        daysInMonth={DAYS_IN_MONTH}
-        avail={AVAIL}
-        full={FULL}
-        onPick={pickDate}
+        today={today}
+        firstDayCol={firstDayCol}
+        daysInMonth={daysInMonth}
+        avail={avail}
+        full={full}
+        onPick={onPickDate}
       />
 
       <div className="mt-6 pt-5 border-t border-ink-100">
@@ -44,7 +55,7 @@ export default function BookingCalendar() {
           </h3>
           <span className="text-xs text-ink-500">GMT+3 (İstanbul)</span>
         </div>
-        <TimeSlots slots={slots} onPick={pickSlot} />
+        <TimeSlots slots={slots} onPick={onPickSlot} />
       </div>
     </div>
   )

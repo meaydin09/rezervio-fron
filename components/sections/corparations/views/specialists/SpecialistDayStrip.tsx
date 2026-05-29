@@ -79,7 +79,7 @@ export default function SpecialistDayStrip({ selectedDay, onPickDay }: Props) {
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
         {days.map((day) => {
           const isSelected = day.date === selectedDay
           const isDisabled = day.isClosed || day.isFull || day.isPast
@@ -88,7 +88,7 @@ export default function SpecialistDayStrip({ selectedDay, onPickDay }: Props) {
             <div
               key={day.date}
               onClick={() => !isDisabled && onPickDay(day.date, day.isClosed, day.isFull)}
-              className={`text-center p-2 rounded-lg transition ${
+              className={`text-center p-1 sm:p-2 rounded-lg transition ${
                 isDisabled
                   ? 'opacity-40 cursor-not-allowed'
                   : isSelected
@@ -98,13 +98,13 @@ export default function SpecialistDayStrip({ selectedDay, onPickDay }: Props) {
                   : 'hover:bg-ink-50 cursor-pointer'
               }`}
             >
-              <div className={`text-[10px] ${isSelected ? 'opacity-80' : day.isToday ? 'text-brand-600' : 'text-ink-500'}`}>
+              <div className={`text-[9px] sm:text-[10px] ${isSelected ? 'opacity-80' : day.isToday ? 'text-brand-600' : 'text-ink-500'}`}>
                 {day.shortName}
               </div>
-              <div className={`text-sm font-bold mt-0.5 ${day.isToday && !isSelected ? 'text-brand-700' : ''}`}>
+              <div className={`text-xs sm:text-sm font-bold mt-0.5 ${day.isToday && !isSelected ? 'text-brand-700' : ''}`}>
                 {day.date}
               </div>
-              <div className={`text-[10px] mt-1 font-semibold ${isSelected ? 'opacity-80' : day.statusColor}`}>
+              <div className={`text-[9px] sm:text-[10px] mt-0.5 sm:mt-1 font-semibold ${isSelected ? 'opacity-80' : day.statusColor}`}>
                 {day.isPast ? '—' : day.statusText}
               </div>
             </div>

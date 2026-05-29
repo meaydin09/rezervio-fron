@@ -18,21 +18,21 @@ interface Slot {
 type SlotMap = Record<string, Slot>
 
 const initialSlots: SlotMap = {
-  '10:00-0': { type: 'confirmed', name: 'Selin D.',  time: '10:00' },
-  '11:00-1': { type: 'confirmed', name: 'Ahmet K.',  time: '11:00' },
-  '10:00-2': { type: 'confirmed', name: 'Burak M.',  time: '10:00' },
-  '12:00-3': { type: 'confirmed', name: 'Deniz A.',  time: '12:00' },
-  '14:00-1': { type: 'pending',   name: 'Zeynep T.', time: '14:00' },
-  '18:00-3': { type: 'pending',   name: 'Mert Y.',   time: '18:00' },
-  '10:00-4': { type: 'confirmed', name: 'Onur U.',   time: '10:00' },
-  '13:00-4': { type: 'confirmed', name: 'Ayşe Ş.',   time: '13:00' },
-  '16:00-4': { type: 'confirmed', name: 'Berk K.',   time: '16:00' },
-  '14:00-5': { type: 'confirmed', name: 'Cem O.',    time: '14:00' },
-  '12:00-0': { type: 'closed' },'15:00-6': { type: 'closed' },
-  '13:00-2': { type: 'closed' },'16:00-6': { type: 'closed' },
-  '09:00-6': { type: 'closed' },'17:00-6': { type: 'closed' },
-  '10:00-6': { type: 'closed' },'18:00-6': { type: 'closed' },
-  '11:00-6': { type: 'closed' },'19:00-6': { type: 'closed' },
+  '10:00-0': { type: 'confirmed', name: 'Selin D.', time: '10:00' },
+  '11:00-1': { type: 'confirmed', name: 'Ahmet K.', time: '11:00' },
+  '10:00-2': { type: 'confirmed', name: 'Burak M.', time: '10:00' },
+  '12:00-3': { type: 'confirmed', name: 'Deniz A.', time: '12:00' },
+  '14:00-1': { type: 'pending', name: 'Zeynep T.', time: '14:00' },
+  '18:00-3': { type: 'pending', name: 'Mert Y.', time: '18:00' },
+  '10:00-4': { type: 'confirmed', name: 'Onur U.', time: '10:00' },
+  '13:00-4': { type: 'confirmed', name: 'Ayşe Ş.', time: '13:00' },
+  '16:00-4': { type: 'confirmed', name: 'Berk K.', time: '16:00' },
+  '14:00-5': { type: 'confirmed', name: 'Cem O.', time: '14:00' },
+  '12:00-0': { type: 'closed' }, '15:00-6': { type: 'closed' },
+  '13:00-2': { type: 'closed' }, '16:00-6': { type: 'closed' },
+  '09:00-6': { type: 'closed' }, '17:00-6': { type: 'closed' },
+  '10:00-6': { type: 'closed' }, '18:00-6': { type: 'closed' },
+  '11:00-6': { type: 'closed' }, '19:00-6': { type: 'closed' },
   '12:00-6': { type: 'closed' },
   '13:00-6': { type: 'closed' },
   '14:00-6': { type: 'closed' },
@@ -62,7 +62,7 @@ function getMonthDays(offsetMonths = 0) {
   return { year, month, daysInMonth, offset, today }
 }
 
-const monthNames = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']
+const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
 
 // Modal: Müsait slota tıklayınca
 interface BookModalProps {
@@ -81,13 +81,13 @@ function BookModal({ hour, dayLabel, onClose, onBook, onClose2 }: BookModalProps
   const [note, setNote] = useState('')
 
   const services = ['Bireysel Seans', 'Çift Terapisi', 'İlk Görüşme', 'Online Seans', 'EMDR Seansı', 'Diğer']
-const formatPhone = (value: string) => {
-  const digits = value.replace(/\D/g, '').slice(0, 10)
-  if (digits.length <= 3) return digits
-  if (digits.length <= 6) return `${digits.slice(0,3)} ${digits.slice(3)}`
-  if (digits.length <= 8) return `${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6)}`
-  return `${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6,8)} ${digits.slice(8)}`
-}
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, '').slice(0, 10)
+    if (digits.length <= 3) return digits
+    if (digits.length <= 6) return `${digits.slice(0, 3)} ${digits.slice(3)}`
+    if (digits.length <= 8) return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`
+    return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6, 8)} ${digits.slice(8)}`
+  }
   return (
     <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6" onClick={(e) => e.stopPropagation()}>
@@ -122,12 +122,12 @@ const formatPhone = (value: string) => {
             <div className="mt-1 flex">
               <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-500 whitespace-nowrap">+90</span>
               <input
-  value={phone}
-  onChange={(e) => setPhone(formatPhone(e.target.value))}
-  placeholder="5XX XXX XX XX"
-  type="tel"
-  className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0"
-/>
+                value={phone}
+                onChange={(e) => setPhone(formatPhone(e.target.value))}
+                placeholder="5XX XXX XX XX"
+                type="tel"
+                className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none min-w-0"
+              />
             </div>
           </div>
 
@@ -235,9 +235,8 @@ function ViewModal({ slot, hour, dayLabel, onClose }: ViewModalProps) {
           </div>
           <div className="flex items-center justify-between py-2 border-b border-ink-50">
             <span className="text-xs text-ink-500">Durum</span>
-            <span className={`inline-flex items-center text-[11px] font-semibold px-2 py-0.5 rounded-full ${
-              slot.type === 'confirmed' ? 'bg-brand-50 text-brand-700' : 'bg-amber-50 text-amber-700'
-            }`}>
+            <span className={`inline-flex items-center text-[11px] font-semibold px-2 py-0.5 rounded-full ${slot.type === 'confirmed' ? 'bg-brand-50 text-brand-700' : 'bg-amber-50 text-amber-700'
+              }`}>
               {slot.type === 'confirmed' ? 'Onaylı' : 'Onay Bekliyor'}
             </span>
           </div>
@@ -287,11 +286,25 @@ function WeekView({ offset, slots, onSlotClick }: WeekViewProps) {
                 const type = slot?.type
                 const isPast = day.past
 
-                if (isPast) return (
-                  <div key={i} className="p-1 border-r border-ink-50">
-                    <div className="w-full h-full min-h-[52px] rounded-md bg-ink-50 opacity-40" />
-                  </div>
-                )
+                if (isPast) {
+                  const pastSlot = slots[key]
+                  const pastType = pastSlot?.type
+
+                  if (pastType === 'confirmed' || pastType === 'pending') return (
+                    <div key={i} className="p-1 border-r border-ink-50">
+                      <div className="w-full h-full min-h-[52px] rounded-md bg-ink-100 border border-ink-200 text-ink-400 p-1.5 opacity-60">
+                        <div className="text-[11px] font-semibold truncate">{pastSlot.name}</div>
+                        <div className="text-[10px] opacity-70">{pastSlot.time}</div>
+                      </div>
+                    </div>
+                  )
+
+                  return (
+                    <div key={i} className="p-1 border-r border-ink-50">
+                      <div className="w-full h-full min-h-[52px] rounded-md bg-ink-50 opacity-40" />
+                    </div>
+                  )
+                }
 
                 if (type === 'confirmed') return (
                   <div key={i} className="p-1 border-r border-ink-50">
@@ -314,14 +327,14 @@ function WeekView({ offset, slots, onSlotClick }: WeekViewProps) {
                 )
 
                 if (type === 'closed') return (
-  <div key={i} className="p-1 border-r border-ink-50">
-    <div
-      onClick={() => onSlotClick(key, slots[key], hour, `${day.short} ${day.date}`)}
-      className="w-full h-full min-h-[52px] rounded-md border border-ink-200 cursor-pointer hover:border-brand-300 hover:opacity-80 transition"
-      style={{ backgroundImage: 'repeating-linear-gradient(45deg,#f8fafc,#f8fafc 6px,#f1f5f9 6px,#f1f5f9 12px)' }}
-    />
-  </div>
-)
+                  <div key={i} className="p-1 border-r border-ink-50">
+                    <div
+                      onClick={() => onSlotClick(key, slots[key], hour, `${day.short} ${day.date}`)}
+                      className="w-full h-full min-h-[52px] rounded-md border border-ink-200 cursor-pointer hover:border-brand-300 hover:opacity-80 transition"
+                      style={{ backgroundImage: 'repeating-linear-gradient(45deg,#f8fafc,#f8fafc 6px,#f1f5f9 6px,#f1f5f9 12px)' }}
+                    />
+                  </div>
+                )
 
                 // available veya empty → müsait
                 return (
@@ -342,7 +355,7 @@ function WeekView({ offset, slots, onSlotClick }: WeekViewProps) {
 }
 
 // --- Aylık View ---
-function MonthView({ offset }: { offset: number }) {
+function MonthView({ offset, onDayClick }: { offset: number; onDayClick: (date: Date) => void }) {
   const { year, month, daysInMonth, offset: startOffset, today } = getMonthDays(offset)
   const dayNames = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz']
   const cells = Array.from({ length: startOffset + daysInMonth }, (_, i) => i < startOffset ? null : i - startOffset + 1)
@@ -356,12 +369,17 @@ function MonthView({ offset }: { offset: number }) {
         {cells.map((day, i) => {
           if (!day) return <div key={i} />
           const isToday = today.getDate() === day && today.getMonth() === month && today.getFullYear() === year
-          const isPast = new Date(year, month, day) < today
+          const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+          const isPast = new Date(year, month, day) < todayMidnight
           const count = appointmentCounts[day]
           return (
-            <div key={i} className={`aspect-square rounded-xl flex flex-col items-center justify-center cursor-pointer transition text-sm font-semibold ${
-              isToday ? 'bg-brand-600 text-white' : isPast ? 'text-ink-300 cursor-not-allowed' : 'hover:bg-ink-50 text-ink-800'
-            }`}>
+            <div
+              key={i}
+              onClick={() => !isPast && onDayClick(new Date(year, month, day))}
+              className={`aspect-square rounded-xl flex flex-col items-center justify-center transition text-sm font-semibold ${
+                isToday ? 'bg-brand-600 text-white cursor-pointer' : isPast ? 'text-ink-300 cursor-not-allowed' : 'hover:bg-ink-50 text-ink-800 cursor-pointer'
+              }`}
+            >
               {day}
               {count && !isPast && <span className={`w-1.5 h-1.5 rounded-full mt-0.5 ${isToday ? 'bg-white/70' : 'bg-brand-400'}`} />}
             </div>
@@ -373,16 +391,19 @@ function MonthView({ offset }: { offset: number }) {
 }
 
 // --- Günlük View ---
-function DayView({ slots, onSlotClick }: { slots: SlotMap; onSlotClick: (key: string, slot: Slot | null, hour: string, dayLabel: string) => void }) {
-  const today = new Date()
-  const dayNames = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi']
-  const dayLabel = `${dayNames[today.getDay()]} ${today.getDate()}`
-  const dayIndex = today.getDay() === 0 ? 6 : today.getDay() - 1
+function DayView({ slots, onSlotClick, selectedDate }: {
+  slots: SlotMap
+  selectedDate: Date
+  onSlotClick: (key: string, slot: Slot | null, hour: string, dayLabel: string) => void
+}) {
+  const dayNames = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi']
+  const dayLabel = `${dayNames[selectedDate.getDay()]} ${selectedDate.getDate()}`
+  const dayIndex = selectedDate.getDay() === 0 ? 6 : selectedDate.getDay() - 1
 
   return (
     <div className="p-4">
       <div className="text-sm font-semibold text-ink-900 mb-4">
-        {dayNames[today.getDay()]}, {today.getDate()} {monthNames[today.getMonth()]} {today.getFullYear()}
+        {dayNames[selectedDate.getDay()]}, {selectedDate.getDate()} {monthNames[selectedDate.getMonth()]} {selectedDate.getFullYear()}
       </div>
       <div className="space-y-1">
         {hours.map((hour) => {
@@ -425,25 +446,26 @@ function DayView({ slots, onSlotClick }: { slots: SlotMap; onSlotClick: (key: st
 export default function WeeklyCalendar() {
   const [mode, setMode] = useState<CalendarMode>('Hafta')
   const [offset, setOffset] = useState(0)
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
   const [slots, setSlots] = useState<SlotMap>(initialSlots)
   const [bookModal, setBookModal] = useState<{ key: string; hour: string; dayLabel: string } | null>(null)
   const [viewModal, setViewModal] = useState<{ slot: Slot; hour: string; dayLabel: string } | null>(null)
-const [openModal, setOpenModal] = useState<{ key: string; hour: string; dayLabel: string } | null>(null)
+  const [openModal, setOpenModal] = useState<{ key: string; hour: string; dayLabel: string } | null>(null)
 
   const handleSlotClick = (key: string, slot: Slot | null, hour: string, dayLabel: string) => {
-  if (!slot || slot.type === 'available') {
-    setBookModal({ key, hour, dayLabel })
-  } else if (slot.type === 'confirmed' || slot.type === 'pending') {
-    setViewModal({ slot, hour, dayLabel })
-  } else if (slot.type === 'closed') {
-    setOpenModal({ key, hour, dayLabel })
+    if (!slot || slot.type === 'available') {
+      setBookModal({ key, hour, dayLabel })
+    } else if (slot.type === 'confirmed' || slot.type === 'pending') {
+      setViewModal({ slot, hour, dayLabel })
+    } else if (slot.type === 'closed') {
+      setOpenModal({ key, hour, dayLabel })
+    }
   }
-}
- const handleBook = (name: string, note: string) => {
-  if (!bookModal) return
-  setSlots((prev) => ({ ...prev, [bookModal.key]: { type: 'confirmed', name, time: bookModal.hour, note } }))
-  setBookModal(null)
-}
+  const handleBook = (name: string, note: string) => {
+    if (!bookModal) return
+    setSlots((prev) => ({ ...prev, [bookModal.key]: { type: 'confirmed', name, time: bookModal.hour, note } }))
+    setBookModal(null)
+  }
 
 
   const handleClose2 = () => {
@@ -465,7 +487,7 @@ const [openModal, setOpenModal] = useState<{ key: string; hour: string; dayLabel
     return `${today.getDate()} ${monthNames[today.getMonth()]}`
   }
 
-  
+
 
   return (
     <div className="xl:col-span-2 bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
@@ -499,13 +521,13 @@ const [openModal, setOpenModal] = useState<{ key: string; hour: string; dayLabel
       </div>
 
       {mode === 'Hafta' && <WeekView offset={offset} slots={slots} onSlotClick={handleSlotClick} />}
-      {mode === 'Ay'    && <MonthView offset={offset} />}
-      {mode === 'Gün'   && <DayView slots={slots} onSlotClick={handleSlotClick} />}
+      {mode === 'Ay' && <MonthView offset={offset} onDayClick={(date) => { setSelectedDate(date); setMode('Gün') }} />}
+      {mode === 'Gün' && <DayView slots={slots} onSlotClick={handleSlotClick} selectedDate={selectedDate} />}
 
       <div className="flex items-center gap-4 px-5 py-3 border-t border-ink-100 text-xs text-ink-500 flex-wrap">
         {[
-          { color: 'bg-brand-400',   label: 'Onaylı randevu' },
-          { color: 'bg-amber-300',   label: 'Onay bekleyen'  },
+          { color: 'bg-brand-400', label: 'Onaylı randevu' },
+          { color: 'bg-amber-300', label: 'Onay bekleyen' },
           { color: 'bg-emerald-100 border border-dashed border-emerald-300', label: 'Müsait' },
           { color: '', label: 'Kapalı', striped: true },
         ].map((item) => (
@@ -536,43 +558,43 @@ const [openModal, setOpenModal] = useState<{ key: string; hour: string; dayLabel
         />
       )}
       {openModal && (
-  <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setOpenModal(null)}>
-    <div className="bg-white rounded-2xl shadow-xl max-w-xs w-full p-6" onClick={(e) => e.stopPropagation()}>
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h3 className="font-bold text-ink-900">Kapalı Saat</h3>
-          <p className="text-xs text-ink-500 mt-0.5">{openModal.dayLabel} · {openModal.hour}</p>
+        <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setOpenModal(null)}>
+          <div className="bg-white rounded-2xl shadow-xl max-w-xs w-full p-6" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="font-bold text-ink-900">Kapalı Saat</h3>
+                <p className="text-xs text-ink-500 mt-0.5">{openModal.dayLabel} · {openModal.hour}</p>
+              </div>
+              <button onClick={() => setOpenModal(null)} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center cursor-pointer">
+                <X className="w-4 h-4 text-ink-400" strokeWidth={2} />
+              </button>
+            </div>
+            <p className="text-sm text-ink-600 mb-5">Bu saat kapalı olarak işaretlenmiş. Tekrar müsait yapmak ister misiniz?</p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setOpenModal(null)}
+                className="flex-1 py-2.5 text-sm font-semibold bg-ink-100 hover:bg-ink-200 text-ink-800 rounded-lg cursor-pointer transition"
+              >
+                İptal
+              </button>
+              <button
+                onClick={() => {
+                  setSlots((prev) => {
+                    const next = { ...prev }
+                    delete next[openModal.key]
+                    return next
+                  })
+                  setOpenModal(null)
+                }}
+                className="flex-1 py-2.5 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg cursor-pointer transition"
+              >
+                Müsait Yap
+              </button>
+            </div>
+          </div>
         </div>
-        <button onClick={() => setOpenModal(null)} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center cursor-pointer">
-          <X className="w-4 h-4 text-ink-400" strokeWidth={2} />
-        </button>
-      </div>
-      <p className="text-sm text-ink-600 mb-5">Bu saat kapalı olarak işaretlenmiş. Tekrar müsait yapmak ister misiniz?</p>
-      <div className="flex gap-2">
-        <button
-          onClick={() => setOpenModal(null)}
-          className="flex-1 py-2.5 text-sm font-semibold bg-ink-100 hover:bg-ink-200 text-ink-800 rounded-lg cursor-pointer transition"
-        >
-          İptal
-        </button>
-        <button
-          onClick={() => {
-            setSlots((prev) => {
-              const next = { ...prev }
-              delete next[openModal.key]
-              return next
-            })
-            setOpenModal(null)
-          }}
-          className="flex-1 py-2.5 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg cursor-pointer transition"
-        >
-          Müsait Yap
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   )
-  
+
 }

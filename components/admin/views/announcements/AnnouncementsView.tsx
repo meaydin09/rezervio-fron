@@ -4,6 +4,9 @@ const recent = [
   { status: 'Gönderildi', title: 'Mayıs ayı bakım duyurusu', meta: '1.247 üyeye · %78 okundu', when: '3 gün önce' },
   { status: 'Gönderildi', title: 'Yeni tema özellikleri',     meta: '892 üyeye · %91 okundu',   when: '1 hafta önce' },
   { status: 'Taslak',     title: 'Q3 planlaması',             meta: 'Düzenlenmeyi bekliyor',     when: '2 hafta önce' },
+   { status: 'Gönderildi', title: 'Mayıs ayı bakım duyurusu', meta: '1.247 üyeye · %78 okundu', when: '3 gün önce' },
+  { status: 'Gönderildi', title: 'Yeni tema özellikleri',     meta: '892 üyeye · %91 okundu',   when: '1 hafta önce' },
+  { status: 'Taslak',     title: 'Q3 planlaması',             meta: 'Düzenlenmeyi bekliyor',     when: '2 hafta önce' },
 ]
 
 const statusColors: Record<string, string> = {
@@ -15,9 +18,9 @@ export default function AnnouncementsView() {
   return (
     <div className="grid lg:grid-cols-3 gap-6">
       <AnnouncementForm />
-      <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-5">
-        <h3 className="font-semibold text-ink-900">Son Duyurular</h3>
-        <div className="mt-4 space-y-3">
+      <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-5 flex flex-col">
+        <h3 className="font-semibold text-ink-900 shrink-0">Son Duyurular</h3>
+        <div className="mt-4 space-y-3 overflow-y-auto max-h-96 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {recent.map((r) => (
             <div key={r.title} className="p-3 rounded-lg bg-ink-50 border border-ink-100">
               <div className="flex items-center justify-between mb-1">

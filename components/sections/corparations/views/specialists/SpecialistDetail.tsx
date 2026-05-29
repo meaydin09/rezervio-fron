@@ -39,7 +39,7 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
             <h3 className="text-base sm:text-lg font-bold truncate text-ink-900">{specialist.name}</h3>
             <div className="text-xs text-ink-500">{specialist.specialty}</div>
           </div>
-         
+
         </div>
 
         <SpecialistDayStrip selectedDay={selectedDay} onPickDay={onPickDay} />
@@ -51,7 +51,7 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
             </h4>
             <span className="text-xs text-ink-500">GMT+3</span>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
             {slots.map((slot) => (
               <button
                 key={slot.time}
@@ -67,11 +67,10 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
         <button
           onClick={() => setShowModal(true)}
           disabled={!selectedSlot}
-          className={`mt-5 w-full block text-center font-semibold py-3 rounded-xl transition ${
-            selectedSlot
-              ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-[0_10px_30px_-10px_rgba(79,70,229,0.25)] cursor-pointer'
-              : 'bg-ink-100 text-ink-400 cursor-not-allowed'
-          }`}
+          className={`mt-5 w-full block text-center font-semibold py-3 rounded-xl transition ${selectedSlot
+            ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-[0_10px_30px_-10px_rgba(79,70,229,0.25)] cursor-pointer'
+            : 'bg-ink-100 text-ink-400 cursor-not-allowed'
+            }`}
         >
           {selectedSlot ? 'Randevu Oluştur' : 'Önce bir saat seçin'}
         </button>
@@ -95,6 +94,7 @@ export default function SpecialistDetail({ specialist, selectedDay, slots, onPic
           specialistName={specialist.name}
           selectedDay={selectedDay}
           selectedTime={selectedSlot?.time ?? ''}
+          services={specialist.services ?? []}
           onClose={() => setShowModal(false)}
         />
       )}

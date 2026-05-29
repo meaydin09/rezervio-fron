@@ -12,7 +12,7 @@ interface Props {
 
 export default function SpecialistList({ selected, activeFilter, filteredSpecialists, onSelect, onFilterChange }: Props) {
   return (
-    <div className="lg:col-span-5">
+    <div className="col-span-1 lg:col-span-5">
       <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-5">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-ink-900">
@@ -24,7 +24,7 @@ export default function SpecialistList({ selected, activeFilter, filteredSpecial
 
         <SpecialistFilterChips active={activeFilter} onChange={onFilterChange} />
 
-        <div className="space-y-2.5 max-h-[500px] lg:max-h-[600px] overflow-y-auto pr-1">
+        <div className="space-y-2.5 max-h-[400px] sm:max-h-[500px] lg:max-h-[600px] overflow-y-auto pr-1">
           {filteredSpecialists.length === 0 ? (
             <div className="py-8 text-center text-sm text-ink-400">
               Bu kategoride uzman bulunamadı.

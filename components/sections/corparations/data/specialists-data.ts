@@ -1,4 +1,4 @@
-import type { Specialist } from '../types'
+import type { Specialist } from '../types';
 
 export const specialists: Specialist[] = [
   {
@@ -11,6 +11,7 @@ export const specialists: Specialist[] = [
     price: '₺1.200',
     experience: '8 yıl',
     reviewCount: 218,
+    services: ['Bireysel Terapi Seansı', 'EMDR Terapisi'],
     bgColor: 'bg-ink-900',
     availableCount: 3,
     todaySlots: ['Bugün 14:00', '15:30'],
@@ -25,6 +26,7 @@ export const specialists: Specialist[] = [
     price: '₺1.800',
     experience: '12 yıl',
     reviewCount: 156,
+    services: ['Psikiyatri Konsültasyonu'],
     bgColor: 'bg-brand-600',
     availableCount: 5,
   },
@@ -38,6 +40,7 @@ export const specialists: Specialist[] = [
     price: '₺1.400',
     experience: '6 yıl',
     reviewCount: 94,
+    services: ['Çocuk & Ergen Terapisi'],
     bgColor: 'bg-emerald-600',
     availableCount: 1,
   },
@@ -51,6 +54,7 @@ export const specialists: Specialist[] = [
     price: '₺1.600',
     experience: '10 yıl',
     reviewCount: 203,
+    services: ['Çift Terapisi'],
     bgColor: 'bg-amber-600',
     availableCount: 8,
   },
@@ -64,6 +68,7 @@ export const specialists: Specialist[] = [
     price: '₺1.500',
     experience: '9 yıl',
     reviewCount: 187,
+    services: ['EMDR Terapisi'],
     bgColor: 'bg-violet-600',
     availableCount: null,
     nextAvailable: '22 Mayıs',
@@ -78,16 +83,17 @@ export const specialists: Specialist[] = [
     price: '₺1.300',
     experience: '7 yıl',
     reviewCount: 142,
+    services: ['Bireysel Terapi Seansı'],
     bgColor: 'bg-sky-600',
     availableCount: 4,
   },
-]
+];
 
 export const filterMap: Record<string, string[]> = {
-  'Tümü':       [],
-  'Psikolog':   ['Klinik Psikolog', 'Çocuk & Ergen', 'EMDR', 'Kaygı'],
+  'Tümü': [],
+  'Psikolog': ['Klinik Psikolog', 'Çocuk & Ergen', 'EMDR', 'Kaygı'],
   'Psikiyatrist': ['Psikiyatrist'],
-  'Aile Dan.':  ['Aile', 'Çift'],
-  'Çocuk':      ['Çocuk'],
-}
-export const filterChips = ['Tümü', 'Psikolog', 'Psikiyatrist', 'Aile Dan.', 'Çocuk']
+  'Aile Dan.': ['Ala', 'Çift'],
+  'Çocuk': ['Çocuk'],
+};
+export const filterChips = ['Tümü', 'Psikolog', 'Psikiyatrist', 'Aile Dan.', 'Çocuk'];

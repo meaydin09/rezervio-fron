@@ -85,7 +85,7 @@ const [settingsFocus, setSettingsFocus] = useState<'education' | 'certificate' |
               <div className="mt-6 grid xl:grid-cols-3 gap-6">
                 <WeeklyCalendar />
                 <div className="space-y-5">
-                  <TodayAppointments />
+                  <TodayAppointments onViewAll={() => setActiveView('appointments')} />
                   <BookingLinkCard />
                   <ThemeCustomizer
                     active={active}
@@ -114,7 +114,7 @@ const [settingsFocus, setSettingsFocus] = useState<'education' | 'certificate' |
 
           {activeView === 'appointments' && (
             <div className="mt-2">
-              <TodayAppointments />
+              <TodayAppointments onViewAll={() => setActiveView('appointments')} />
             </div>
           )}
 

@@ -13,11 +13,75 @@ const features = [
 ]
 
 const invoices = [
-  { date: '15 May 2026', amount: '₺699', status: 'Ödendi' },
-  { date: '15 Nis 2026', amount: '₺699', status: 'Ödendi' },
-  { date: '15 Mar 2026', amount: '₺699', status: 'Ödendi' },
-  { date: '15 Şub 2026', amount: '₺699', status: 'Ödendi' },
+  { date: '15 May 2026', amount: '₺699', status: 'Ödendi', no: 'RZV-2026-005' },
+  { date: '15 Nis 2026', amount: '₺699', status: 'Ödendi', no: 'RZV-2026-004' },
+  { date: '15 Mar 2026', amount: '₺699', status: 'Ödendi', no: 'RZV-2026-003' },
+  { date: '15 Şub 2026', amount: '₺699', status: 'Ödendi', no: 'RZV-2026-002' },
 ]
+
+function downloadInvoicePdf(inv: typeof invoices[0]) {
+  const html = `<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fatura ${inv.no}</title>
+  <style>
+    body { font-family: sans-serif; color: #0f172a; padding: 48px; max-width: 600px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+    .logo { font-size: 22px; font-weight: 800; color: #4f46e5; }
+    .badge { background: #ecfdf5; color: #065f46; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+    h2 { font-size: 18px; margin: 0 0 4px; }
+    .meta { color: #64748b; font-size: 13px; margin-bottom: 32px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    th { text-align: left; font-size: 11px; color: #64748b; text-transform: uppercase; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
+    td { padding: 12px 0; font-size: 14px; border-bottom: 1px solid #f1f5f9; }
+    .total-row td { font-weight: 700; font-size: 15px; border-bottom: none; padding-top: 16px; }
+    .footer { margin-top: 40px; font-size: 11px; color: #94a3b8; text-align: center; }
+    @media print { body { padding: 24px; } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Rezervio</div>
+    <span class="badge">✓ Ödendi</span>
+  </div>
+  <h2>Fatura</h2>
+  <div class="meta">
+    Fatura No: <strong>${inv.no}</strong> &nbsp;·&nbsp; Tarih: <strong>${inv.date}</strong>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Açıklama</th><th>Dönem</th><th style="text-align:right">Tutar</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rezervio Profesyonel Plan</td>
+        <td>Aylık abonelik</td>
+        <td style="text-align:right">${inv.amount}</td>
+      </tr>
+      <tr>
+        <td>KDV (%20)</td>
+        <td></td>
+        <td style="text-align:right">₺139,80</td>
+      </tr>
+      <tr class="total-row">
+        <td>Toplam</td>
+        <td></td>
+        <td style="text-align:right">${inv.amount}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer">Rezervio Teknoloji A.Ş. · rezervio.co · destek@rezervio.co</div>
+</body>
+</html>`
+
+  const win = window.open('', '_blank')
+  if (!win) return
+  win.document.write(html)
+  win.document.close()
+  win.focus()
+  setTimeout(() => { win.print(); win.close() }, 400)
+}
 
 export default function SubscriptionView() {
   const [showCancelModal, setShowCancelModal] = useState(false)
@@ -125,7 +189,7 @@ export default function SubscriptionView() {
                     {inv.status}
                   </span>
                   <span className="text-sm font-bold text-ink-900">{inv.amount}</span>
-                  <button className="text-xs text-brand-600 hover:underline cursor-pointer">PDF</button>
+                  <button onClick={() => downloadInvoicePdf(inv)} className="text-xs text-brand-600 hover:underline cursor-pointer">PDF</button>
                 </div>
               </div>
             ))}

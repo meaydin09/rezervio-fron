@@ -44,7 +44,7 @@ export default function ServiceCard({ service, onBook }: Props) {
             onClick={onBook}
             className="mt-4 bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition flex items-center gap-2 cursor-pointer"
           >
-            Randevu Al
+            Uzman Seç
             <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
           </button>
         </div>

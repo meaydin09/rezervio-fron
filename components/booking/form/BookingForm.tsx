@@ -1,24 +1,106 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { ArrowRight, X } from 'lucide-react'
 import type { BookingFormData } from '../types'
 import SuccessModal from './SuccessModal'
 
 interface Props {
   date: string
   time: string
+  onBooked: (time: string) => void
 }
 
 const inputClass = 'mt-1 w-full text-sm border border-ink-200 rounded-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition'
 
-export default function BookingForm({ date, time }: Props) {
-  const [form, setForm] = useState<BookingFormData>({
-    firstName: '', lastName: '', phone: '',
-    email: '', note: '', kvkkAccepted: false,
-  })
+const EMPTY_FORM: BookingFormData = {
+  firstName: '', lastName: '', phone: '', email: '', note: '', kvkkAccepted: false,
+}
+
+function KvkkModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-white rounded-2xl shadow-xl border border-ink-100 w-full max-w-lg max-h-[80vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+        <div className="p-4 border-b border-ink-100 flex items-center justify-between shrink-0">
+          <h3 className="font-bold text-base text-ink-900">KVKK Aydınlatma Metni</h3>
+          <button onClick={onClose} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center transition cursor-pointer">
+            <X className="w-4 h-4 text-ink-500" strokeWidth={2} />
+          </button>
+        </div>
+        <div className="p-5 overflow-y-auto text-sm text-ink-700 space-y-5 leading-relaxed">
+          <div>
+            <p className="font-semibold text-ink-900 mb-1">1. Veri Sorumlusu</p>
+            <p>Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında Rezervio Teknoloji A.Ş. ("Rezervio") tarafından hazırlanmıştır. Rezervio, veri sorumlusu sıfatıyla kişisel verilerinizi aşağıda açıklanan amaçlar doğrultusunda işlemektedir.</p>
+          </div>
+          <div>
+            <p className="font-semibold text-ink-900 mb-1">2. İşlenen Kişisel Veriler</p>
+            <p>Randevu sürecinde aşağıdaki kişisel verileriniz işlenmektedir:</p>
+            <ul className="mt-2 space-y-1 list-disc list-inside text-ink-600">
+              <li>Ad ve soyad</li>
+              <li>Telefon numarası</li>
+              <li>E-posta adresi</li>
+              <li>Randevu tarihi, saati ve seans notları</li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold text-ink-900 mb-1">3. Kişisel Verilerin İşlenme Amaçları</p>
+            <p>Kişisel verileriniz; randevu oluşturma ve yönetimi, WhatsApp ve e-posta yoluyla hatırlatma bildirimleri gönderilmesi, hizmet kalitesinin ölçülmesi ve iyileştirilmesi, yasal yükümlülüklerin yerine getirilmesi ile olası uyuşmazlıklarda delil oluşturulması amaçlarıyla işlenmektedir.</p>
+          </div>
+          <div>
+            <p className="font-semibold text-ink-900 mb-1">4. Kişisel Verilerin Aktarılması</p>
+            <p>Kişisel verileriniz; randevu yönetimi, bildirim ve ödeme altyapısı hizmetleri kapsamında yurt içindeki iş ortaklarımızla paylaşılabilir. Verileriniz yurt dışına aktarılmamaktadır. Aktarım yapılan taraflar, KVKK kapsamındaki gizlilik yükümlülüklerine tabidir.</p>
+          </div>
+          <div>
+            <p className="font-semibold text-ink-900 mb-1">5. Kişisel Verilerin Saklanma Süresi</p>
+            <p>Kişisel verileriniz, hizmet ilişkisinin sona ermesinden itibaren ilgili mevzuatta öngörülen süreler boyunca saklanır. Yasal saklama süresi dolduğunda verileriniz güvenli biçimde silinir veya anonim hale getirilir.</p>
+          </div>
+          <div>
+            <p className="font-semibold text-ink-900 mb-1">6. Kişisel Veri Güvenliği</p>
+            <p>Rezervio, kişisel verilerinizin yetkisiz erişime, kayba veya ifşaya karşı korunması amacıyla teknik ve idari güvenlik önlemleri uygulamaktadır. Veriler şifreli bağlantılar (SSL/TLS) üzerinden iletilmekte ve güvenli sunucularda saklanmaktadır.</p>
+          </div>
+          <div>
+            <p className="font-semibold text-ink-900 mb-1">7. İlgili Kişi Hakları</p>
+            <p>KVKK'nın 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
+            <ul className="mt-2 space-y-1 list-disc list-inside text-ink-600">
+              <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+              <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+              <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+              <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+              <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme</li>
+              <li>Kanunda öngörülen şartlar çerçevesinde silinmesini veya yok edilmesini isteme</li>
+              <li>İşlemeye itiraz etme ve zararın giderilmesini talep etme</li>
+            </ul>
+            <p className="mt-2">Talepleriniz için <span className="font-semibold text-ink-900">kvkk@rezervio.co</span> adresine yazılı olarak başvurabilirsiniz. Başvurular en geç 30 gün içinde yanıtlanır.</p>
+          </div>
+        </div>
+        <div className="p-4 border-t border-ink-100 shrink-0">
+          <button onClick={onClose} className="w-full py-2.5 text-sm font-semibold bg-ink-900 hover:bg-ink-800 text-white rounded-xl transition cursor-pointer">
+            Anladım, Kapat
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function BookingForm({ date, time, onBooked }: Props) {
+  const [form, setForm] = useState<BookingFormData>(EMPTY_FORM)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [showKvkk, setShowKvkk] = useState(false)
+
+  const handleClose = () => {
+    setShowSuccess(false)
+    setForm(EMPTY_FORM)
+    onBooked(time)
+  }
+
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, '').slice(0, 10)
+    if (digits.length <= 3) return digits
+    if (digits.length <= 6) return `${digits.slice(0, 3)} ${digits.slice(3)}`
+    if (digits.length <= 8) return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`
+    return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6, 8)} ${digits.slice(8)}`
+  }
 
   const update = <K extends keyof BookingFormData>(key: K, value: BookingFormData[K]) =>
     setForm((prev) => ({ ...prev, [key]: value }))
@@ -62,8 +144,8 @@ export default function BookingForm({ date, time }: Props) {
             <label className="text-xs font-semibold text-ink-700">Telefon</label>
             <div className="mt-1 flex">
               <span className="px-3 py-2.5 bg-ink-50 border border-r-0 border-ink-200 rounded-l-lg text-sm text-ink-600">+90</span>
-              <input type="tel" placeholder="5XX 123 45 67" value={form.phone}
-                onChange={(e) => update('phone', e.target.value)}
+              <input type="tel" placeholder="5XX XXX XX XX" value={form.phone}
+                onChange={(e) => update('phone', formatPhone(e.target.value))}
                 className="flex-1 text-sm border border-ink-200 rounded-r-lg px-3 py-2.5 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition min-w-0" />
             </div>
             <p className="mt-1 text-[11px] text-ink-500 flex items-center gap-1">
@@ -94,7 +176,7 @@ export default function BookingForm({ date, time }: Props) {
               onChange={(e) => update('kvkkAccepted', e.target.checked)}
               className="mt-0.5 w-4 h-4 rounded border-ink-300 text-brand-600 focus:ring-brand-500" />
             <label htmlFor="kvkk" className="text-xs text-ink-600 leading-relaxed cursor-pointer">
-              <Link href="/kvkk" target="_blank" className="underline">KVKK metnini</Link> okudum,
+              <button type="button" onClick={() => setShowKvkk(true)} className="underline cursor-pointer">KVKK metnini</button> okudum,
               kişisel verilerimin işlenmesini kabul ediyorum.
             </label>
           </div>
@@ -111,11 +193,10 @@ export default function BookingForm({ date, time }: Props) {
       </div>
 
       {showSuccess && (
-        <SuccessModal
-          date={date}
-          time={time}
-          onClose={() => setShowSuccess(false)}
-        />
+        <SuccessModal date={date} time={time} onClose={handleClose} />
+      )}
+      {showKvkk && (
+        <KvkkModal onClose={() => setShowKvkk(false)} />
       )}
     </>
   )

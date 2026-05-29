@@ -11,6 +11,7 @@ export interface Specialist {
   experience: string
   reviewCount: number
   bgColor: string
+  services?: string[]
   availableCount: number | null
   nextAvailable?: string
   todaySlots?: string[]
@@ -32,6 +33,7 @@ export interface TimeSlot {
 export interface Service {
   id: number
   title: string
+  category: string
   description: string
   price: string
   duration: string

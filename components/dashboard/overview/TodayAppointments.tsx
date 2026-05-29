@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { RefreshCw } from 'lucide-react'
 import AppointmentCard from './AppointmentCard'
 
@@ -27,19 +28,35 @@ const appointments = [
   },
 ]
 
-export default function TodayAppointments() {
+interface Props {
+  onViewAll?: () => void
+}
+
+export default function TodayAppointments({ onViewAll }: Props) {
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [lastUpdate, setLastUpdate] = useState('az önce')
+
+  const handleRefresh = () => {
+    if (isRefreshing) return
+    setIsRefreshing(true)
+    setTimeout(() => {
+      setIsRefreshing(false)
+      setLastUpdate('az önce')
+    }, 1200)
+  }
+
   return (
     <div className="bg-white rounded-2xl border border-ink-100 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-5">
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-ink-900">Bugünün Randevuları</h3>
         <div className="flex items-center gap-1">
-          <button className="w-8 h-8 rounded-lg hover:bg-ink-50 flex items-center justify-center text-ink-500 hover:text-ink-900 transition cursor-pointer" title="Yenile">
-            <RefreshCw className="w-4 h-4" strokeWidth={2} />
+          <button onClick={handleRefresh} className="w-8 h-8 rounded-lg hover:bg-ink-50 flex items-center justify-center text-ink-500 hover:text-ink-900 transition cursor-pointer" title="Yenile">
+            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} strokeWidth={2} />
           </button>
-          <button className="text-xs text-brand-600 font-semibold hover:underline cursor-pointer">Tümü</button>
+          <button onClick={onViewAll} className="text-xs text-brand-600 font-semibold hover:underline cursor-pointer">Tümü</button>
         </div>
       </div>
-      <div className="text-[11px] text-ink-400 mt-1">Son güncelleme: az önce</div>
+      <div className="text-[11px] text-ink-400 mt-1">Son güncelleme: {lastUpdate}</div>
       <div className="mt-4 space-y-3">
         {appointments.map((a) => (
           <AppointmentCard key={a.name} {...a} />

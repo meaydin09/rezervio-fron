@@ -31,12 +31,12 @@ export default function UserRow({ user, onEdit }: Props) {
           <button onClick={() => onEdit(user)} className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center text-ink-500 cursor-pointer transition" title="Düzenle">
             <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
           </button>
-          <button className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center text-ink-500 cursor-pointer transition" title="Görüntüle">
+          {/* <button className="w-8 h-8 rounded-lg hover:bg-ink-100 flex items-center justify-center text-ink-500 cursor-pointer transition" title="Görüntüle">
             <Eye className="w-3.5 h-3.5" strokeWidth={2} />
           </button>
           <button className="w-8 h-8 rounded-lg hover:bg-rose-50 flex items-center justify-center text-rose-500 cursor-pointer transition" title="Askıya Al">
             <Ban className="w-3.5 h-3.5" strokeWidth={2} />
-          </button>
+          </button> */}
         </div>
       </td>
     </tr>

@@ -13,6 +13,7 @@ export const services: Service[] = [
   {
     id: 1,
     title: 'Bireysel Terapi Seansı',
+    category: 'Bireysel Terapi',
     description: 'Bilişsel davranışçı terapi (BDT) çerçevesinde, kişiye özel terapi seansları. Kaygı, depresyon, ilişki problemleri ve travma sonrası stres alanlarında çalışılır.',
     price: '₺1.200',
     duration: '50 dakika',
@@ -24,6 +25,7 @@ export const services: Service[] = [
   {
     id: 2,
     title: 'Çift Terapisi',
+    category: 'Çift & Aile Terapisi',
     description: 'İlişki dinamiklerini güçlendiren, iletişim ve bağ kurma becerilerini geliştiren çiftlere yönelik özel seans.',
     price: '₺1.800',
     duration: '75 dakika',
@@ -35,6 +37,7 @@ export const services: Service[] = [
   {
     id: 3,
     title: 'Çocuk & Ergen Terapisi',
+    category: 'Çocuk & Ergen',
     description: '6-18 yaş arası çocuk ve ergenler için oyun terapisi, sanat terapisi ve bilişsel destek seansları.',
     price: '₺1.400',
     duration: '45 dakika',
@@ -46,6 +49,7 @@ export const services: Service[] = [
   {
     id: 4,
     title: 'EMDR Terapisi',
+    category: 'Bireysel Terapi',
     description: 'Travma sonrası stres bozukluğu ve fobiler için göz hareketleriyle duyarsızlaştırma ve yeniden işleme terapisi.',
     price: '₺1.500',
     duration: '60 dakika',
@@ -58,6 +62,7 @@ export const services: Service[] = [
   {
     id: 5,
     title: 'Psikiyatri Konsültasyonu',
+    category: 'Psikiyatri Görüşmesi',
     description: 'Psikiyatrist eşliğinde tanı koyma, ilaç tedavisi düzenlemesi ve takip görüşmeleri.',
     price: '₺1.800',
     duration: '30 dakika',

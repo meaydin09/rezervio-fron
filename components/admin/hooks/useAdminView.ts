@@ -11,6 +11,9 @@ const titles: Record<AdminView, string> = {
   support:       'Destek Talepleri',
   audit:         'İşlem Geçmişi',
   settings:      'Sistem Ayarları',
+  kvkk:          'KVKK Metni',
+  privacy:       'Gizlilik Politikası',
+  faq:           'Sıkça Sorulan Sorular',
 }
 
 export function useAdminView() {

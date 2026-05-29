@@ -339,11 +339,11 @@ export default function SettingsView({ focusSection, onFocusComplete }: Props) {
               {certificates.length === 0 && <p className="text-xs text-ink-400 text-center py-2">Henüz sertifika eklenmedi</p>}
             </div>
 
-            <label className="mt-3 w-full border border-dashed border-ink-200 hover:border-amber-300 rounded-xl p-3 text-center hover:bg-amber-50/50 transition cursor-pointer flex items-center justify-center gap-2 block">
+            {/* <label className="mt-3 w-full border border-dashed border-ink-200 hover:border-amber-300 rounded-xl p-3 text-center hover:bg-amber-50/50 transition cursor-pointer flex items-center justify-center gap-2 block">
               <Upload className="w-4 h-4 text-ink-400" strokeWidth={2} />
               <span className="text-xs text-ink-500">Sertifika dosyası yükle (PDF)</span>
               <input type="file" accept=".pdf,image/*" className="hidden" />
-            </label>
+            </label> */}
           </div>
         </div>
       </div>

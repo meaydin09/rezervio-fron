@@ -46,6 +46,16 @@ export function useCalendar() {
     setSelectedTime(time)
   }
 
+  const markTaken = (time: string) => {
+    setSlots((prev) =>
+      prev.map((s) => ({
+        ...s,
+        variant: s.time === time ? 'taken' : s.variant === 'selected' ? 'free' : s.variant,
+      }))
+    )
+    setSelectedTime('')
+  }
+
   const getDayName = (day: number) => {
     const idx = (FIRST_DAY_COL + day - 1) % 7
     return DAY_NAMES[idx]
@@ -60,6 +70,7 @@ export function useCalendar() {
     slots,
     pickDate,
     pickSlot,
+    markTaken,
     getFormattedDate,
     FIRST_DAY_COL,
     DAYS_IN_MONTH,

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { navLinks } from './nav-links'
 
-const hideNavOn = ['/iletisim', '/login', '/register']
+const hideNavOn = ['/iletisim', '/login', '/register', '/kvkk', '/gizlilik']
 
 export default function DesktopNav() {
   const pathname = usePathname()

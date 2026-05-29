@@ -34,9 +34,9 @@ export default function RecentRegistrations({ onViewUsers }: Props) {
             <span className={`hidden sm:inline-flex items-center text-[11px] font-medium px-2 py-0.5 rounded-full ${planBadge[user.plan]}`}>
               {user.plan}
             </span>
-            <button className="text-ink-400 hover:text-ink-900 hidden sm:block cursor-pointer">
+            {/* <button className="text-ink-400 hover:text-ink-900 hidden sm:block cursor-pointer">
               <MoreVertical className="w-4 h-4" strokeWidth={2} />
-            </button>
+            </button> */}
           </div>
         ))}
       </div>

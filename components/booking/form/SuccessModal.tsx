@@ -5,6 +5,23 @@ interface Props {
   }
   
   export default function SuccessModal({ date, time, onClose }: Props) {
+    const addToCalendar = () => {
+  const title = "Psikolog Randevusu"
+  const details = "Rezervio üzerinden oluşturulan randevu"
+  const location = "Online Görüşme"
+
+  const startDate = "20260529T123000Z"
+  const endDate = "20260529T133000Z"
+
+  const googleUrl =
+    `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+    `&text=${encodeURIComponent(title)}` +
+    `&dates=${startDate}/${endDate}` +
+    `&details=${encodeURIComponent(details)}` +
+    `&location=${encodeURIComponent(location)}`
+
+  window.open(googleUrl, "_blank")
+}
     return (
       <div className="fixed inset-0 z-40 bg-ink-900/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-[0_10px_30px_-10px_rgba(79,70,229,0.25)] max-w-md w-full p-6 sm:p-7 text-center">
@@ -44,7 +61,9 @@ interface Props {
             >
               Kapat
             </button>
-            <button className="flex-1 bg-ink-900 hover:bg-ink-800 text-white font-semibold py-2.5 rounded-lg transition cursor-pointer">
+            <button
+            onClick={addToCalendar}
+            className="flex-1 bg-ink-900 hover:bg-ink-800 text-white font-semibold py-2.5 rounded-lg transition cursor-pointer">
               Takvime Ekle
             </button>
           </div>

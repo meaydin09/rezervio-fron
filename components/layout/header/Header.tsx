@@ -2,15 +2,20 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Logo from './Logo'
 import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
 import MobileMenuButton from './MobileMenuButton'
 import { useMobileMenu } from './hooks/useMobileMenu'
 
+const hideNavOn = ['/iletisim', '/login', '/register', '/kvkk', '/gizlilik']
+
 export default function Header() {
   const { isOpen, toggleMenu, closeMenu } = useMobileMenu()
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+  const hideNav = hideNavOn.includes(pathname)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0)
@@ -43,7 +48,7 @@ export default function Header() {
         </div>
       </div>
 
-      <MobileNav isOpen={isOpen} closeMenu={closeMenu} />
+      {!hideNav && <MobileNav isOpen={isOpen} closeMenu={closeMenu} />}
     </header>
   )
 }
